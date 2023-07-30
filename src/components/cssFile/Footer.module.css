@@ -1,0 +1,14 @@
+.profile {
+    /* margin-top: 5rem; */
+    /* box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2); */
+    width: 100%;
+    /* border-radius: 8px; */
+    padding: 1rem;
+    text-align: center;
+    background-color: #f4f0fa;
+    background-color: #b9b7bd;
+  }
+  .headerCont{
+    font-size: 18px;
+  }
+  
