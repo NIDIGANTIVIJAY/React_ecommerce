@@ -6,7 +6,7 @@ const ContainerPage=()=>{
 
     return(<>
     
-     <Header/>
+     
      <Outlet/>
         
     </>)

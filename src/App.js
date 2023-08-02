@@ -12,7 +12,7 @@ import About from "./components/jsFile/About";
 import Auth from "./components/jsFile/Auth";
 import Header from './components/jsFile/Header';
 // import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route ,Outlet} from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ContainerPage from "./components/jsFile/index" 
@@ -29,23 +29,27 @@ function App() {
 
   return (
     <>
+    <Header/>
       
       <Routes>
-        <Route exact path="/" element={<ContainerPage />} >
-        <Route exact path="dashboard" element={<Home />} />
-        <Route exact path="contact" element={<Contact />} />
-        <Route exact path="faq" element={<FAQ />} />
-        <Route exact path="sales" element={<Sales />} />
-        <Route exact path="adminDashboard" element={<AdminDashboard />} />
-        <Route exact path="about" element={<About />} />
-        <Route exact path="product" element={<Product />} />
-        <Route exact path="login" element={<Auth />} />
-        </Route>
-      </Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/faq" element={<FAQ />} />
+        <Route exact path="/sales" element={<Sales />} />
+        <Route exact path="/adminDashboard" element={<AdminDashboard />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/product" element={<Product />} />
+        <Route exact path="/login" element={<Auth />} />
+        
+        </Routes>
+      
 
       <div>
         <Footer />
       </div>
+
+
+      {/* <Outlet/> */}
     </>
   );
 }

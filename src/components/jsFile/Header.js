@@ -25,7 +25,7 @@ const Header = (props) => {
             <li>
               <NavLink
                 className={location.pathname === "/" ? classes.activeClass : ""}
-                to="/dashboard"
+                to="/"
               >
                 Home
               </NavLink>
