@@ -6,7 +6,7 @@
   text-align: center;
   background-color: #0a0a0a;
   /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%); */
-  clip-path: polygon(-400% 0%, 100% 0%, 113% 96%);
+  clip-path: polygon(-547% 14%, 100% 0%, 101% 96%);
 }
 
 .auth1 {
@@ -64,4 +64,12 @@
 .btn button:hover {
   background-color: white;
   color: #10c5cb;
+}
+
+.sigupText{
+    display: flex;
+    flex-direction: row;
+    gap: 11px;
+    margin-top: 37px;
+    margin-left: 102px;
 }

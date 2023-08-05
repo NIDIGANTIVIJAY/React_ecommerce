@@ -3,6 +3,7 @@ import Type from "../type";
 const initialState = {
   login: false,
   token: false,
+  JsonData:""
 };
 
 const Common = (state = initialState, action) => {
@@ -22,6 +23,13 @@ const Common = (state = initialState, action) => {
         ...state,
         login: action.payload,
       };
+      case Type.JSONDATA:
+        console.log(action.payload, "JSONDATA");
+  
+        return {
+          ...state,
+          JsonData: action.payload,
+        };
 
     default:
       return state

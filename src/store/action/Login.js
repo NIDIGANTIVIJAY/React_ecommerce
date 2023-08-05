@@ -11,13 +11,13 @@ export const LoginFun=(email,password,onSuccess)=>(dispatch)=>{
         password: password,
       })
       .then((res) => {
-        console.log("in nav",res.data.user.token[0].token) ;
+        console.log("in nav",res.data) ;
         // setToken(res.data.user.token[0].token)
 
-          if(res.status === 200){
+          if(res.data?.user?.token !== undefined){
             dispatch({
                 type:"TOKEN",
-                payload:res.data.user.token[0].token
+                payload:res?.data?.user?.token[0]?.token
                })
                
                dispatch({

@@ -4,7 +4,6 @@
     text-align: center;
     background-color: #f4f0fa;
   display: flex;
-  flex-direction: column-reverse;
   }
 
   .auth {

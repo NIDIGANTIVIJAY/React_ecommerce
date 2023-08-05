@@ -82,8 +82,20 @@ const onSuccessfun=(res)=>{
             </div>
           </form>
         </section>
+        <span>
+          <span className={classes.sigupText}>
+            
+       <p style={{color:"aqua"}}>{"Create a Account?"}</p>  <Link to="/signup">Signup</Link> 
+       
+       </span>
+      </span>
+     
       </main>
-    </main> :
+     
+    </main> 
+     
+    
+    :
 
     <AdminDash token={token}/>
     
