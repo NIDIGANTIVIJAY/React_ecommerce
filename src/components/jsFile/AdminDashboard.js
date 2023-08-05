@@ -14,6 +14,7 @@ import { LoginFun } from "../../store/action/Login";
 const Contact = (props) => {
   const [showPrev,setShowPrev]=useState(false)
   const [previewData,setPreviewData]=useState()
+  const [showTotaData,setShowTotalData]=useState(false)
   const userlogin=useSelector((state)=>state.Common.login)
   console.log(userlogin)
   const url = process.env.REACT_APP_SERVICE_ID;
@@ -152,15 +153,9 @@ const Contact = (props) => {
 
     {userlogin === false ?   <Auth ></Auth> : 
     <>
-
+   
       <main className={classes.profile}>
-        {/* <button
-          onClick={(e) => {
-            logoutFun(e);
-          }}
-        >
-        
-        </button> */}
+      
         <main className={ showPrev ? classes.auth : classes.initialauth}>
           <section>
             <form>
@@ -253,6 +248,7 @@ const Contact = (props) => {
                   }}
                 />
               </div>
+           
               <button className={classes.btn} onClick={(e)=>{AddFun(e)}}> Add </button>
                { payloadData.productId !== "" &&    <button className={classes.btn}  onClick={(e)=>{previeFun(e)}}> Prev </button>
                
@@ -261,7 +257,7 @@ const Contact = (props) => {
             </form>
           </section>
         </main>
-
+        <button type="submit" style={{ width: "9rem", borderRadius: "5px"}} onClick={()=>{props.setShowProduct(false)}} >Back</button>
    { showPrev && 
     
         <main className={classes.auth1}>
@@ -307,13 +303,17 @@ const Contact = (props) => {
           </p>
         </main>  }
 
+        
+
 
 
 
 
       </main> 
-
-      <Sales /> 
+{/* {
+  showTotaData &&    <Sales /> 
+}
+       */}
       
       </> }
     </>

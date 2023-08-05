@@ -1,7 +1,8 @@
 const Type={
     "LOGIN":"LOGIN",
     "TOKEN": "TOKEN",
-     "USERDETAILS": "USERDETAILS"
+     "USERDETAILS": "USERDETAILS",
+     "JSONDATA":"JSONDATA"
 }
 
 export default Type
