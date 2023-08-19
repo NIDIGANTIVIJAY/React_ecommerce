@@ -1,10 +1,10 @@
 .profile {
-    margin: 5rem 0rem 0rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
     padding: 1rem;
     text-align: center;
     background-color: #f4f0fa;
   display: flex;
-  flex-direction: column-reverse;
+  /* flex-direction: column-reverse; */
   }
 
   .auth {

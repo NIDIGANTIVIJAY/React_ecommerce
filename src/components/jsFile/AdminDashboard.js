@@ -153,8 +153,13 @@ const Contact = (props) => {
 
     {userlogin === false ?   <Auth ></Auth> : 
     <>
+    <div style={{marginTop:"80px"}}> 
+      <button type="submit" style={{ width: "9rem", borderRadius:"5px",margin:"20px"}} onClick={()=>{props.setShowProduct(false)}} >Back</button>
+    </div>
    
       <main className={classes.profile}>
+
+         
       
         <main className={ showPrev ? classes.auth : classes.initialauth}>
           <section>
@@ -257,15 +262,12 @@ const Contact = (props) => {
             </form>
           </section>
         </main>
-        <button type="submit" style={{ width: "9rem", borderRadius: "5px"}} onClick={()=>{props.setShowProduct(false)}} >Back</button>
+        {/* <button type="submit" style={{ width: "9rem", borderRadius: "5px"}} onClick={()=>{props.setShowProduct(false)}} >Back</button> */}
    { showPrev && 
     
         <main className={classes.auth1}>
 
-          <img className={classes.img}  src={url+`productimg/${previewData?.productId}` }
-        
-        
-        alt="img" />
+          <img className={classes.img}  src={url+`productimg/${previewData?.productId}` } alt="img" />
           <div className={classes.tableContainer}>
             <table className={classes.admTable}>
               <tr className={classes.admTable}>
