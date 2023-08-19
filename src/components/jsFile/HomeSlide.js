@@ -13,8 +13,7 @@ const spanStyle = {
   background: 'rgb(191 182 182 / 32%)',
   color: 'rgb(100, 34, 34)',
   fontWeight: "600",
-  fontSize: "18px",
-  fontFamily: "cursive",
+  // fontFamily: "cursive",
   borderRadius: "8px",
   boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)"
 
@@ -25,7 +24,6 @@ const divStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundSize: 'cover',
-  height: '540px'
 }
 const slideImages = [
   {
@@ -52,8 +50,8 @@ const HomeSlide = () => {
         <Slide>
          {slideImages.map((slideImage, index)=> (
             <div key={index}>
-              <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
-                <span style={spanStyle}>{slideImage.caption}</span>
+              <div className='divStyle' style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                {/* <span className='spanStyle' style={spanStyle}>{slideImage.caption}</span> */}
                 
               </div>
             </div>

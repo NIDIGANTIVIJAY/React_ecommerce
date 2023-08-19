@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "../cssFile/Header.module.css";
 import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import amwLogo from "../Assets/AMW-Logo.png"
 const Header = (props) => {
   const location = useLocation();
   const url = process.env.REACT_APP_SERVICE_ID;
   const nav = useNavigate();
+  
+  const [toggelerState, setToggelerState]=useState(true)
+
+  const toggelerFun = ()=>{
+    setToggelerState(!toggelerState)
+  }
+  
   const logoutFun = (e) => {
     e.preventDefault();
     axios
@@ -18,17 +26,27 @@ const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-        <h1>Aakash Metal Works</h1>
 
-        <nav>
-          <ul>
-            <li>
-              <NavLink
-                className={location.pathname === "/" ? classes.activeClass : ""}
-                to="/"
-              >
-                Home
-              </NavLink>
+        <div className={classes.headerBox} >
+          <img className={classes.logoImg} src={amwLogo} alt="amwLogo" />
+        <h1> 
+        <NavLink to="/">Aakash Metal Works</NavLink>
+
+        </h1>
+        </div>
+
+        <div className={classes.toggelerContainer} onClick={()=> toggelerFun()}>
+          <span className={classes.spanline}></span>
+          <span className={classes.spanline}></span>
+          <span className={classes.spanline}></span>
+          
+
+        </div>
+        <nav className={toggelerState ? classes.list : classes.list2} onClick={()=> toggelerFun()}>
+          <ul >
+             
+            <li >
+              <NavLink className={location.pathname==='/' ? "activeClass" : ""} to="/">Home</NavLink>
             </li>
             <li>
               <NavLink
@@ -71,14 +89,14 @@ const Header = (props) => {
                 Knowledge Centre
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 className={location.pathname === "/login" ? classes.activeClass : ""}
                 to="/adminDashboard"
               >
                 Admin Page
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>

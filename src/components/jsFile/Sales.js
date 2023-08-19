@@ -146,7 +146,7 @@ const Sales = (props) => {
     <div >
       <main className={classes.profile}>
         <h4> Total Product </h4>
-        <div className={classes.table}>
+        <div className={classes.table} style={{width: "93rem"}}>
           <div className={classes.productCard}>
             <div className={classes.productBox}>
               <div className={classes.productBoxdetail}>
@@ -171,8 +171,10 @@ const Sales = (props) => {
           </div>
         </div>
       </main>
-      <span className={classes.buttonClass}>
+      <span className={classes.buttonClass} style={{}}>
         <button
+        style={{margin: "0px 18px 20px",
+          borderRadius: "8px"}}
           type="submit"
           onClick={() => {
             props.setShowProduct(true);
