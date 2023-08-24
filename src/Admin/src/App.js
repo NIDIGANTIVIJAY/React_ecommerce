@@ -8,6 +8,7 @@ import Accounts from './component/Accounts';
 import Production from './component/Production';
 import ProcessInvoice from './component/InvoiceGeneration/processInvoice';
 import GenearatedInvoice from './component/InvoiceGeneration/GeneratedInvoice';
+import Dashboard from './component/Dashboard';
 function Admin() {
 
 
@@ -22,7 +23,7 @@ function Admin() {
         <Route path="production" element={<Production />} />
         <Route path="accounts" element={<Accounts />} />
         <Route path='invoice/generatedinvoice' element={<GenearatedInvoice/>}/>
-          
+        <Route path='Dashboard' element={<Dashboard/>}/>
          </Route>
 
        

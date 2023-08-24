@@ -19,8 +19,9 @@ const GenearatedInvoice = () => {
     { field: "TotalAmount" },
 
     { field: "AmountPaid" },
-    
+    { field: "DueAmount" },
     { field: "Status" }
+   
 
   ])
   const [rowData, setRowData] = useState()
@@ -36,14 +37,21 @@ const GenearatedInvoice = () => {
 
 
   return (<>
-    <h1>Generated-Invoice</h1>
+    <div className="headerDiv">
+      <h1>Generated Invoice</h1>
+    </div>
+    
 
 
-    <div className="ag-theme-alpine" style={{ height: 400, width: 900 }}>
+    <div className="ag-theme-alpine agTable" >
 
       <AgGridReact columnDefs={coldef} rowData={rowData}
       />
     </div>
+
+    <div className="Button">
+      {/* <button type="submit"  >Back</button> */}
+     </div>
 
 
   </>)

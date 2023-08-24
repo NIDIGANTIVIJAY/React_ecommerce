@@ -19,55 +19,53 @@ import { useNavigate } from "react-router-dom";
 const AmountModal = (props) => {
   const url = process.env.REACT_APP_SERVICE_ID
   const dispatch = useDispatch()
-  const  showModal= useSelector((state) => state.Common.showModalComp)
-  const ModalData = useSelector((state) => state.Common.AmountData)
-  const [showData, setData] = useState()
-  console.log(ModalData)
+  // const  showModal= useSelector((state) => state.Common.showModalComp1)
+  // const ModalData = useSelector((state) => state.Common.AmountData)
+  // console.log(showModal,"showModalComp1")
 
 
-  // useEffect(() => {
-  //   axios.post(url + "getinvoiceData", ModalData.productIdArr).then((res) => {
-  //     console.log(res.data)
-  //     setData(res.data)
-  //   })
-  // }, [])
+
+
   const onCloseFun = () => {
 
-    dispatch({
-        type:"SHOWMODALCOMP",
-        payload:false
-      })
+    // dispatch({
+    //     type:"SHOWMOADALCOMPBOOL",
+    //     payload:false
+    //   })
+  props.setShowModal1(false)
+
+
   }
 
-  const onclickSubmitFun=()=>{
-       
-    let payloadData={
-        "Status":"",
-        "GSTNumber":"",
-        "Name":"",
-        "productIdArr":"",
-        "InvoiceProduct":"",
-           "AmountPaid":"",
-           "TotalAmount":"",
-           "TotalQuatity":""
-      }
-      payloadData["AmountPaid"]=AmountPaid
-      payloadData["GSTNumber"]=ModalData["GSTNumber"]
-      payloadData["Name"]=ModalData["Name"]
-      payloadData["Status"]=ModalData["Status"]
-      payloadData["productIdArr"]=ModalData["productIdArr"]
-      payloadData["InvoiceProduct"]=ModalData["InvoiceProduct"]
-       
-       
+  const onclickSubmitFun = () => {
+
+    let payloadData = {
+      "Status": "",
+      "GSTNumber": "",
+      "Name": "",
+      "productIdArr": "",
+      "InvoiceProduct": "",
+      "AmountPaid": "",
+      "TotalAmount": "",
+      "TotalQuatity": "",
+      "_id":"",
+      "ProductUniqId":""
+    }
+    payloadData["AmountPaid"] = AmountPaid
+    payloadData["GSTNumber"] = props.ModalData["GSTNumber"]
+    payloadData["Name"] = props.ModalData["Name"]
+    payloadData["Status"] = props.ModalData["Status"]
+    payloadData["productIdArr"] = props.ModalData["productIdArr"]
+    payloadData["InvoiceProduct"] =props.ModalData["InvoiceProduct"]
+    payloadData["_id"]=props.ModalData["_id"]
+  payloadData["ProductUniqId"]=props.ModalData["ProductUniqId"]
     console.log(payloadData)
     axios.post(url+"savequoteData",payloadData).then((res)=>{
         console.log(res)
        
     })
-    dispatch({
-        type:"SHOWMODALCOMP",
-        payload:false
-      })
+    props.setShowModal1(false)
+
   }
 
   const [AmountPaid,setAmountPaid]=useState()
@@ -76,7 +74,7 @@ const AmountModal = (props) => {
 
 
     <Modal
-      show={showModal}
+      show={props.show}
       onHide={onCloseFun}
       aria-labelledby="ModalHeader"
       centered

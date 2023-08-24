@@ -7,7 +7,7 @@ import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import parse from 'html-react-parser';
 
 
@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 const PreviewInvoice=(props)=>{
   const url=process.env.REACT_APP_SERVICE_ID
   const nav=useNavigate()
+  const dispatch=useDispatch()
   const processDataArra=useSelector((state)=>state.Common.processingArray
     )
     console.log(processDataArra,"PPPPP")
@@ -54,9 +55,38 @@ const PreviewInvoice=(props)=>{
     const onCloseFun=()=>{
       
       if(props.InvoiceData?.Status === "pending" && props.InvoiceData?.Status !== undefined  ){
+        props.setInvoiceData()
+        // dispatch(
+        //   {
+        //     type:"PROCESSINGARRAY",
+        //     payload:false
+            
+        //   }
+        // )
+        // dispatch(
+        //   {
+        //     type:"EDITEDPROCESSINGARRAY",
+        //     payload:false
+            
+        //   }
+        // )
+        dispatch(
+          {
+            type:"RESETEDITEDPROCESSINGARRAY",
+       
+            
+          }
+        )
+        dispatch(
+          {
+            type:"RESETPROCESSINGARRAY",
+           
+            
+          }
+        )
           nav("process")
           console.log("IN CLOSEFUN1")
-        props.setInvoiceData()
+       
         
       }
   props.setShow(false)
@@ -76,7 +106,9 @@ const PreviewInvoice=(props)=>{
         
         </Modal.Header>
         <Modal.Body>
-        {parse(src)}
+          <div className="invoiceContainer"> 
+          {parse(src)}
+          </div>
         </Modal.Body>
        
       </Modal>
