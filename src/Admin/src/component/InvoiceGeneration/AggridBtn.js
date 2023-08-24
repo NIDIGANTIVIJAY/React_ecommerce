@@ -24,9 +24,9 @@ const AggridBtn =(props) => {
 
   return (
     <span>
-     
+     <div className='agButton'>
       <button onClick={() => buttonClicked()}>Add Item </button>
-    
+      </div>
     </span>
   );
 };

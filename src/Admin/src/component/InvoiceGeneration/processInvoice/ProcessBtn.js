@@ -14,8 +14,10 @@ const ProcessBtn =(props) => {
       let obj=props.data
       obj["Status"]="Completed" 
       console.log(obj)
+
+  
         dispatch({
-          type:"SHOWMODALCOMP",
+          type:"SHOWMOADALCOMPBOOL",
           payload:true
         })
 
@@ -43,9 +45,9 @@ const ProcessBtn =(props) => {
   const onClickRemove =()=>{
     console.log(props)
     let payload={
-        "GST":""
+        "_id":""
     };
-    payload["GST"]=props.data.GSTNumber
+    payload["_id"]=props.data._id
     console.log(payload)
     axios.post(url+"removequote",payload).then((res)=>{
         console.log(res)
@@ -55,13 +57,13 @@ const ProcessBtn =(props) => {
 
   return (
     <span>
-     
+     <div className='agButton'>
       <button onClick={() => onClickRemove()}>Remove </button>
       &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
       <button onClick={() => onClickEditFun()}>Edit </button>
       &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
       <button onClick={() => buttonsave()}>Confirm </button>
-    
+    </div>
     </span>
   );
 };
