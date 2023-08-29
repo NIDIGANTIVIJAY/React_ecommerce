@@ -20,7 +20,6 @@ const AddNewItem =(props)=>{
 
     const [payloadData, setPayloadData] = useState({
         imageData: "",
-        productId: "",
         description: "",
         price: "",
         item: "",
@@ -38,7 +37,6 @@ const AddNewItem =(props)=>{
     
             let formData = new FormData()
         formData.append('imageData',payloadData["imageData"])
-        formData.append('productId',payloadData["productId"])
         formData.append('description',payloadData["description"])
         formData.append('price',payloadData["price"])
         formData.append('item',payloadData["item"])
@@ -46,6 +44,8 @@ const AddNewItem =(props)=>{
         formData.append('size',payloadData["size"])
         formData.append('weight',payloadData['weight'])
         formData.append('quantity',payloadData["quantity"])
+        formData.append('Hsno',payloadData["hsnNo"])
+
            console.log(formData)
         const headers = {
           "Content-Type": "form-data"
@@ -195,7 +195,7 @@ const AddNewItem =(props)=>{
                   }}
                 />
               </div>
-              <div className={classes.control}>
+              {/* <div className={classes.control}>
                 <label htmlFor="productid">Product ID</label>
                 <input
                   type="text"
@@ -204,7 +204,7 @@ const AddNewItem =(props)=>{
                     onChangeFun(e, "productid");
                   }}
                 />
-              </div>
+              </div> */}
 
               <div className={classes.control}>
                 <label htmlFor="description">Description</label>

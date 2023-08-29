@@ -38,7 +38,7 @@ const [showModal1,setShowModal1]=useState(false)
     
       setRowData(res.data);
     });
-  }, [showModal1]);
+  }, [showModal1,showModal]);
 
 
 
@@ -94,11 +94,11 @@ const onClickRemove =()=>{
 return (
   <span>
    <div className='agButton'>
-    <button onClick={() => onClickRemove()}>Remove </button>
+    <button className="AdBtn" onClick={() => onClickRemove()}>Remove </button>
     &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-    <button onClick={() => onClickEditFun()}>Edit </button>
+    <button className="AdBtn" onClick={() => onClickEditFun()}>Edit </button>
     &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-    <button onClick={() => buttonsave()}>Confirm </button>
+    <button className="AdBtn" onClick={() => buttonsave()}>Confirm </button>
   </div>
   </span>
 );
@@ -130,7 +130,7 @@ const [coldef, setcolDef] = useState([
   return (
     <>
       <div className="processWrapper">
-        <h1>Processing Invoice</h1>
+        <h3>Processing Invoice</h3>
 
         <div className="ag-theme-alpine agTable" >
           <AgGridReact columnDefs={coldef} rowData={rowData} />
@@ -139,6 +139,7 @@ const [coldef, setcolDef] = useState([
         <div>{showModal && <QuoteFormEdit show={showModal} setShowModal={setShowModal} editFormData={editFormData} />}</div>
         <div className="Button">
           <button
+          className="AdBtn"
             type="submit"
             onClick={() => {
               nav("/admin/invoice/generatedinvoice");

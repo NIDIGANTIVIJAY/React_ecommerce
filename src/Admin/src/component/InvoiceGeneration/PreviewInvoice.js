@@ -89,7 +89,8 @@ const PreviewInvoice=(props)=>{
        
         
       }
-  props.setShow(false)
+      props.setShowSubmitBtn(true)
+       props.setShow(false)
     }
 
   return(<>

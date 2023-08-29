@@ -75,12 +75,15 @@ const QuoteFormEdit = (props) => {
     console.log(payloadData, "xxxxx")
     axios.post(url + "editquote", payloadData).then((res) => {
       console.log(res)
+      if(res.status === 200){
+        props.setShowModal(false)
+      }
     })
     //  dispatch({
     //   type:"SHOWMODAL",
     //   payload:false
     //  }) 
-    props.setShowModal(false)
+    
   }
 
   const OnclickEditFun = (e) => {
@@ -225,15 +228,17 @@ const QuoteFormEdit = (props) => {
       size="xl"
     >
       <Modal.Header closeButton onClick={onCloseFun}>
-        Invoice Edit
+      <label className=" inputHeader">Invoice Edit</label>
       </Modal.Header>
       <Modal.Body>
         <form>
+          <div className="LableDiv">
           <label>GSTNumber</label>
           <input type="text" defaultValue={props.editFormData.GSTNumber} onChange={(e) => { OnChangeFun(e, "GSTNumber") }} />
-          <label style={{ marginLeft: "49%", marginRight: "1%" }}>Name</label>
+          <br />
+          <label >Name</label>
           <input type="text" defaultValue={props.editFormData.Name} onChange={(e) => { OnChangeFun(e, "Name") }} />
-
+          
 
 
 
@@ -248,32 +253,40 @@ const QuoteFormEdit = (props) => {
 
             payloadData.InvoiceProduct.map((i, index) => {
               return <>
-                <br></br>
-                <label><b>List{index + 1}</b></label>
-                <br></br>
-                <br></br>
-                <br></br>
+
+          <div className="LableDivEdit">
+
+               
+                <label className="ListNameHeader">List{index + 1}</label>
+                
+                <br />
 
                 <label >{keys[3]}</label>
                 <input type="text" defaultValue={i.Price} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[3]) }} ></input>
-                <label style={{ marginLeft: "49%", marginRight: "1%" }}  >{keys[4]}</label>
+                
+                <label  >{keys[4]}</label>
                 <input type="text" defaultValue={i.Item} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[4]) }} ></input>
-
-                <br></br>
 
                 <label>{keys[5]}</label>
                 <input type="text" defaultValue={i.Product} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[5]) }} ></input>
-                <label style={{ marginLeft: "49%", marginRight: "1%" }} >{keys[8]}</label>
+                
+                <label >{keys[8]}</label>
                 <input type="number" defaultValue={i.Quantity} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[8]) }} ></input>
-                <br></br>
-
 
                 <label>{keys[6]}</label>
                 <input type="text" defaultValue={i.Size} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[6]) }} ></input>
-                <label style={{ marginLeft: "49%", marginRight: "1%" }} >{keys[7]}</label>
+                
+                <label >{keys[7]}</label>
                 <input type="text" defaultValue={i.Weight} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[7]) }} ></input>
+
+                <br />
+                <br />
+
+                </div>
               </>
             })}
+
+</div>
 
 
 
