@@ -62,9 +62,12 @@ const AmountModal = (props) => {
     console.log(payloadData)
     axios.post(url+"savequoteData",payloadData).then((res)=>{
         console.log(res)
+          if(res.status === 200){
+            props.setShowModal1(false)
+
+          }
        
     })
-    props.setShowModal1(false)
 
   }
 
@@ -84,8 +87,8 @@ const AmountModal = (props) => {
 
       </Modal.Header>
       <Modal.Body>
-
-          <input type="text" onChange={(e)=>{setAmountPaid(e.target.value)}} />
+        <label style={{paddingRight: "12px"}} >Initial Paid Amount</label>
+        <input type="text" onChange={(e)=>{setAmountPaid(e.target.value)}} />
           
 
 

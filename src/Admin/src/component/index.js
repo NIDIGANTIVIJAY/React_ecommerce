@@ -21,7 +21,18 @@ const Component = () => {
     nav("/admin/expenses");
   };
 
+  const landingPage = ()=>{
+    nav("/admin/Dashboard");
+  }
+
+  
+
   const [toggelerState, setToggelerState] = useState(true);
+  const [activeBar, setActiveBar] = useState("sideBarBtnActive");
+
+  // if(nav("/admin/Dashboard")=== true){
+
+  // }
 
   const toggelerFun = () => {
     setToggelerState(!toggelerState);
@@ -31,8 +42,8 @@ const Component = () => {
     <>
       <div className="main">
         <div className="header">
-          <div className="logoContainer">
-            <img className={"logoImg"} src={amwLogo} alt="amwLogo" />
+          <div className="logoContainer" >
+            <img  className={"logoImg"} src={amwLogo} alt="amwLogo" onClick={() => landingPage()} />
             <p>Aakash Metal Works (AMW)</p>
           </div>
 

@@ -5,6 +5,7 @@ import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 import classes from "../../../../components/jsFile/AdminAccCreation/index.module.css";
+import css from "../../App.css"
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -84,6 +85,7 @@ const ModaComponent = (props) => {
       aria-labelledby="ModalHeader"
       centered
       size="xl"
+      className="ModalUserCreate"
     >
       <Modal.Header closeButton onClick={onCloseFun}>
 
@@ -164,10 +166,14 @@ const ModaComponent = (props) => {
 
 
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer >
         {/* <Button type="submit" onClick={()=>{onclickSubmitFun()}} >submit </Button> */}
+        <div className="Button">
           <button
-                    className={classes.btn}
+                    // className={classes.btn}
+                    // className={`${classes.btn} ${css.AdBtn}`}
+                    className="AdBtn"
+                  
                     onClick={(e) => {
                         onclickSubmitFun(e);
                     }}
@@ -175,6 +181,7 @@ const ModaComponent = (props) => {
                     {" "}
                     Create account {" "}
                   </button>
+                  </div>
       </Modal.Footer>
 
     </Modal>

@@ -23,7 +23,7 @@ const SubmitInvoice = (props) => {
   const [productName, setproductName] = useState()
   const [usernameData,setusernameData]=useState()
   const [userDetails,setuserDetails]=useState()
-  
+  const [vehicalNumber,setVehicalNumber]=useState()
 
   useEffect(() => {
     axios.get(url + "username").then((res) => {
@@ -61,7 +61,8 @@ const SubmitInvoice = (props) => {
       "productIdArr": "",
       "InvoiceProduct": "",
       "AmountPaid": "",
-      "DueAmount": ""
+      "DueAmount": "",
+      "vehicalNumber":""
 
     }
     payloadData["productIdArr"] = processDataArra
@@ -72,6 +73,7 @@ const SubmitInvoice = (props) => {
     payloadData["address"]= userDetails[0].address
     payloadData["phonenumber"]= userDetails[0].phonenumber
     payloadData["InvoiceProduct"] = formatedArray
+    payloadData["vehicalNumber"]=vehicalNumber
     axios.post(url + "savequoteData", payloadData).then((res) => {
       console.log(res)
 
@@ -108,10 +110,10 @@ setuserDetails(data)
       size="xl"
     >
       <Modal.Header closeButton onClick={onCloseFun}>
-
+      <label className=" inputHeader">Please Slect Name</label>
       </Modal.Header>
       <Modal.Body>
-        <label className="inputLabel">Enter Name</label>
+        
         <Select
 
           defaultValue={selectedOption}
@@ -120,41 +122,63 @@ setuserDetails(data)
 
         />
         {/* <input type="text" onChange={(e) => { setName(e.target.value) }} /> */}
-        <br />
-        {userDetails && userDetails.map((i)=>{
-          return(<>
+
+        {userDetails
+         && userDetails.map((i)=>{
+          
+          return(
+           
+          <div className="LableDiv">
             <label>Name</label>
             <input type="text" readOnly={true} value={i.username} />
             <br></br>
              
          
-            <label>GSTNumber</label>
+            <label>GST Number</label>
       
            <input type="text" readOnly={true} value={i.GstNumber} />
            <br></br>
-            <label>phonenumber</label>
+            <label>Phone Number</label>
            
-            <input type="text" readOnly={true} value={i.phonenumber} />
+            <input type="tel" readOnly={true} value={i.phonenumber} />
             <br></br>
             <label>Address</label>
            
             <input type="text" readOnly={true} value={i.address} />
             <br></br>
-            <label>City</label>
+            <label>Pin Code</label>
       
             <input type="text" readOnly={true} value={i.city} />
             
             <br></br>
          
+            </div>
+          
+          )
+         
+
+        })
+
+      }
+        
+         
+
+
+          {userDetails && userDetails.length > 0 &&  
+          <>
+          
+          <label>vehical Number</label>
+            <input type="text" onChange={(e)=>{setVehicalNumber(e.target.value) }} />
+          
+            </>
             
-          </>) 
-        }) }
+            }
 
         {/* <label className="inputLabel">Enter GST</label>
         <input type="text" onChange={(e) => { setGstNum(e.target.value) }} /> */}
       </Modal.Body>
       <Modal.Footer>
-        <input type="submit" value={"submit"} onClick={() => { onClicSubmitFun() }}></input>
+        <Button type="submit" value={"submit"} onClick={() => { onClicSubmitFun() }}>Submit</Button>
       </Modal.Footer>
 
     </Modal>

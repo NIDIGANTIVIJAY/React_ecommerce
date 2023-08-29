@@ -18,7 +18,8 @@ const Expenses=()=>{
 ]);
 
   return(<>
-    <h1>Expenses</h1>
+    {/* <p className="HeaderText">Expenses </p> */}
+    <h3 >Expenses </h3>
     <div className="ag-theme-alpine agTable" >
     <AgGridReact columnDefs={coldef}
   

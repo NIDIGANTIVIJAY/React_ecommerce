@@ -4,11 +4,12 @@ import axios from "axios";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 import AddNewItem from "./AddNewItem";
+import { useNavigate } from "react-router";
 const Production=()=>{
   const url=process.env.REACT_APP_SERVICE_ID
 
   const [showModal,setShowModal]=useState(false)
-
+  const nav=useNavigate()
 
 
   const updateBtn=(props)=>{
@@ -25,7 +26,7 @@ const Production=()=>{
     return (
       <span>
        <div className='agButton'>
-        <button onClick={() => buttonClicked()}>Update </button>
+        <button className="AdBtn" onClick={() => buttonClicked()}>Update </button>
         </div>
       </span>
   
@@ -73,6 +74,13 @@ useEffect(()=>{
  },[])
 
 
+
+ const navFun=()=>{
+
+  nav("/admin/production/invetory");
+ }
+
+
  
  
 
@@ -88,13 +96,19 @@ useEffect(()=>{
 
 
   return(<>
-    <h1>Production</h1>
-    <button type="submit" onClick={()=>{setShowModal(true)}}>ADD New Item</button>
+    <h3>Production</h3>
+    
     <div className="ag-theme-alpine agTable" >
     <AgGridReact columnDefs={coldef} rowData={rowData}
       rowSelection={'multiple'}
       rowMultiSelectWithClick={true}
     />
+    </div>
+
+    <div className="Button">
+    <button className="AdBtn" type="submit" onClick={()=>{ nav("/admin/production/inOutMat"); } }>In-Out Materials</button>
+    <button className="AdBtn" type="submit" onClick={()=>{setShowModal(true)}}>ADD New Item</button>
+    <button className="AdBtn" type="submit" onClick={()=>{navFun() } }>Inventory-1</button>
     </div>
 
     {showModal && <AddNewItem show={showModal} setShowModal={setShowModal}/>}
