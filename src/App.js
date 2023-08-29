@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/product" element={<Product />} />
         <Route exact path="/login" element={<Auth />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/Admin" element={""}/>
+      
         </Routes>
       
       
