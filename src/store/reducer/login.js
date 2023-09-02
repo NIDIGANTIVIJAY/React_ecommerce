@@ -1,24 +1,45 @@
 import Type from "../type"
 
-const initialState={
-    loginDetails:false
+const initialState = {
+    loginDetails: false,
+    login: false,
+    token: false,
 }
-const LoginReducer=(state=initialState,action)=>{
-      switch(action.Type){
+const LoginReducer = (state = initialState, action) => {
 
-         case Type.USER:
-                return{
-                    ...state,
-                    loginDetails:action.payload
-                }
-           
-              
-         
+    console.log(action.type);
 
-         default:
+
+    switch (action.type) {
+
+        case Type.USER:
+            return {
+                ...state,
+                loginDetails: action.payload
+            }
+
+        case Type.LOGIN:
+            console.log(action.payload, "14247");
+
+            return {
+                ...state,
+                login: action.payload,
+            };
+
+        case Type.TOKEN:
+            console.log(action.payload, "Token");
+            return {
+                ...state,
+                token: action.payload
+            }
+
+
+
+
+        default:
             return state
 
-      }
+    }
 
 
 }

@@ -10,26 +10,18 @@ const initialState = {
   formatedArray: [],
   showModalComp: false,
   showModalComp1: false,
-  AmountData: ""
+  AmountData: "",
+  AccountName : "pending",
+  payloadData:[]
+
+
 };
 
 const Common = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
-    case Type.TOKEN:
-      console.log(action.payload, "Token");
-      return {
-        ...state,
-        token: action.payload
-      }
 
-    case Type.LOGIN:
-      console.log(action.payload, "LOgin");
 
-      return {
-        ...state,
-        login: action.payload,
-      };
+   
     case Type.JSONDATA:
       console.log(action.payload, "JSONDATA");
 
@@ -69,8 +61,6 @@ const Common = (state = initialState, action) => {
       }
 
 
-
-
     case Type.SHOWMODAL:
       console.log(action.payload, state.processingArray, "processingArray");
       return {
@@ -99,8 +89,14 @@ const Common = (state = initialState, action) => {
         formatedArray: state.formatedArray.concat(action.payload)
       }
 
-    case Type.RESETEDITEDPROCESSINGARRAY:
-      console.log(action.payload, initialState.processingArray, "ppo");
+    case Type.REMOVEITEMS:
+      console.log(action.payload,state.formatedArray.filter((i)=> i?.ProductUniqId !== action?.payload.ProductUniqId    ), "ppo");
+      return {
+        ...state,
+        formatedArray: state.formatedArray.filter((i)=> i.ProductUniqId !== action.payload.ProductUniqId    )
+      }
+      case Type.RESETEDITEDPROCESSINGARRAY:
+      console.log(action.payload    , "ppo");
       return {
         ...state,
         formatedArray: []
@@ -121,6 +117,31 @@ const Common = (state = initialState, action) => {
         AmountData: action.payload
       }
 
+      case Type.ACCOUNTNAME:
+        console.log(action.payload, state.AccountName, "AccountName");
+     
+      return {
+        ...state,
+        AccountName: action.payload
+      }
+      case Type.PAYLOAD:
+        console.log(action.payload, state.AccountName, "AccountName");
+     
+      return {
+        ...state,
+        payloadData: state.payloadData.concat(action.payload)
+      }
+    
+      case Type.UPDATEPAYLOAD:
+        console.log(action.payload, state.AccountName, "AccountName");
+     
+      return {
+        ...state,
+        payloadData:  state.payloadData.map(item =>
+          (item.stockId === action.payload.stockId  && item.MonthDates === action.payload.MonthDates)? { ...item, todayProd: action.payload.todayProd } : item
+        ),
+      }
+    
 
     default:
       return state
