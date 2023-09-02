@@ -89,8 +89,7 @@ const PreviewInvoice=(props)=>{
        
         
       }
-      props.setShowSubmitBtn(true)
-       props.setShow(false)
+  props.setShow(false)
     }
 
   return(<>
@@ -107,9 +106,7 @@ const PreviewInvoice=(props)=>{
         
         </Modal.Header>
         <Modal.Body>
-          <div className="invoiceContainer"> 
-          {parse(src)}
-          </div>
+        {parse(src)}
         </Modal.Body>
        
       </Modal>

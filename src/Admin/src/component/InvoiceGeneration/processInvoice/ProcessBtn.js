@@ -58,11 +58,11 @@ const ProcessBtn =(props) => {
   return (
     <span>
      <div className='agButton'>
-      <button className="AdBtn" onClick={() => onClickRemove()}>Remove </button>
+      <button onClick={() => onClickRemove()}>Remove </button>
       &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-      <button className="AdBtn" onClick={() => onClickEditFun()}>Edit </button>
+      <button onClick={() => onClickEditFun()}>Edit </button>
       &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-      <button className="AdBtn" onClick={() => buttonsave()}>Confirm </button>
+      <button onClick={() => buttonsave()}>Confirm </button>
     </div>
     </span>
   );

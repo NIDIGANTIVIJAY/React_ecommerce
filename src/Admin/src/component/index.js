@@ -5,9 +5,6 @@ import amwLogo from "../../../components/Assets/AMW-Logo.png"
 
 const Component = () => {
   const nav = useNavigate();
-  const AdminDashboardChange = () => {
-    nav("/admin/Dashboard");
-  };
   const InvoicesideBarChange = () => {
     nav("/admin/invoice");
   };
@@ -21,18 +18,7 @@ const Component = () => {
     nav("/admin/expenses");
   };
 
-  const landingPage = ()=>{
-    nav("/admin/Dashboard");
-  }
-
-  
-
   const [toggelerState, setToggelerState] = useState(true);
-  const [activeBar, setActiveBar] = useState("sideBarBtnActive");
-
-  // if(nav("/admin/Dashboard")=== true){
-
-  // }
 
   const toggelerFun = () => {
     setToggelerState(!toggelerState);
@@ -42,8 +28,8 @@ const Component = () => {
     <>
       <div className="main">
         <div className="header">
-          <div className="logoContainer" >
-            <img  className={"logoImg"} src={amwLogo} alt="amwLogo" onClick={() => landingPage()} />
+          <div className="logoContainer">
+            <img className={"logoImg"} src={amwLogo} alt="amwLogo" />
             <p>Aakash Metal Works (AMW)</p>
           </div>
 
@@ -60,15 +46,6 @@ const Component = () => {
             onClick={() => toggelerFun()}
           >
             <div className="side-nav--diere">
-
-            <span
-                className="sideBarBtn"
-                onClick={() => {
-                  AdminDashboardChange();
-                }}
-              >
-               Dashboard
-              </span>
               <span
                 className="sideBarBtn"
                 onClick={() => {
@@ -93,14 +70,14 @@ const Component = () => {
               >
                 Account Section
               </span>
-              {/* <span
+              <span
                 className="sideBarBtn"
                 onClick={() => {
                   ExpensessideBarChange();
                 }}
               >
                 Expenses
-              </span> */}
+              </span>
             </div>
           </nav>
 
