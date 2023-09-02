@@ -49,13 +49,13 @@ const Dashboard = () => {
    var Dispatch1 = ["Dispatch"];
   var AvailProd = ["Avail Prod"];
 
-  var Initiate = ["Initiate"];
-  var Processing = ["Processing"];
-  var Completed = ["Completed"];
+  var Initiate = ["Initiate","50"];
+  var Processing = ["Processing","50"];
+  var Completed = ["Completed","50"];
 
-  var Pending = ["Pending"];
-  var Completed = ["Completed"];
-  var Expencess = ["Expencess"];
+  var Pending = ["Pending","50"];
+  var Completed = ["Completed","50"];
+  var Expencess = ["Expencess","50"];
 
   // console.log(data1, data2, data3, "hsj7676hs");
 
@@ -142,7 +142,7 @@ const Dashboard = () => {
 
     },
     color: {
-      pattern: ["#1f77b4", "#aec7e8", "#ff7f0e"],
+      pattern: ["#e3edf7", "#fbaa13", "#44b982"],
     },
     bar: {
       width: {
@@ -154,7 +154,7 @@ const Dashboard = () => {
   var chart = c3.generate({
     bindto: "#pieChart2",
     data: {
-      columns: [Pending, Completed, Expencess],
+      columns: [ Expencess,Pending, Completed],
       type: "pie",
 
 
@@ -180,7 +180,7 @@ const Dashboard = () => {
 
     },
     color: {
-      pattern: ["#1f77b4", "#aec7e8", "#ff7f0e"],
+      pattern: ["#e3edf7", "#fbaa13", "#44b982"],
     },
     bar: {
       width: {
@@ -315,7 +315,7 @@ const Dashboard = () => {
     <div className="dashboardContentView" >
       <div className="RowWrapp">
         <div className="BarDiv">
-          <form style={{ position: "absolute", top: "10px", left: "512px" }}>
+          {/* <form style={{ position: "absolute", top: "10px", left: "512px" }}>
             <label htmlFor="upload">Upload File</label>
             <input
               type="file"
@@ -323,7 +323,7 @@ const Dashboard = () => {
               id="upload"
               onChange={readUploadFile}
             />
-          </form>
+          </form> */}
           <div id="chart"></div>
           {/* <Barchrt/> */}
         </div>

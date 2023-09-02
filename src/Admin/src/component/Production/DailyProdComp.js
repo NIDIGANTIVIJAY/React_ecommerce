@@ -61,7 +61,7 @@ const DailyProd = () => {
     // CustomHeader.js
     useEffect(() => {
 
-        if (coldef === undefined) {
+        if (coldef === undefined &&  showModal === false) {
 
 
             // Get the current date
@@ -157,7 +157,7 @@ const DailyProd = () => {
             })
         }
 
-    }, [])
+    }, [showModal])
 
 
 

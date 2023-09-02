@@ -43,7 +43,7 @@ const AddNewItem =(props)=>{
         formData.append('product',payloadData["product"])
         formData.append('size',payloadData["size"])
         formData.append('weight',payloadData['weight'])
-        formData.append('quantity',payloadData["quantity"])
+        // formData.append('quantity',payloadData["quantity"])
         formData.append('Hsno',payloadData["hsnNo"])
 
            console.log(formData)
@@ -52,6 +52,9 @@ const AddNewItem =(props)=>{
         };
           axios.post(url+ "upload/data",formData,headers).then((res)=>{
             console.log(res)
+            if(res.status === 200){
+              props.setShowModal(false)
+            }
           })
           console.log(payloadData,"Payload Data")
           
@@ -133,7 +136,7 @@ const AddNewItem =(props)=>{
                   }}
                 />
               </div>
-              <div className={classes.control}>
+              {/* <div className={classes.control}>
                 <label htmlFor="quantity">Quantity</label>
                 <input
                   type="number"
@@ -142,7 +145,7 @@ const AddNewItem =(props)=>{
                     onChangeFun(e, "quantity");
                   }}
                 />
-              </div>
+              </div> */}
               <div className={classes.control}>
                 <label htmlFor="HSNNo<">HSN No</label>
                 <input
