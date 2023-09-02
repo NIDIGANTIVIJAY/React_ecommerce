@@ -18,21 +18,17 @@ import AmountModal from "./AmountModal";
 
 const ProcessInvoice = () => {
   const nav = useNavigate();
-  const showModal = useSelector((state) => state.Common.showModal);
-  const showModal1 = useSelector((state) => state.Common.showModalComp1);
+  // const showModal = useSelector((state) => state.Common.showModal);
+  // const showModal1 = useSelector((state) => state.Common.showModalComp1);
+const [showModal,setShowModal]=useState(false)
 
+  const [ModalData,setModalData]=useState()
+
+const [editFormData,setEditFormData]=useState()
+const [showModal1,setShowModal1]=useState(false)
   const url = process.env.REACT_APP_SERVICE_ID;
   
-  const [coldef, setcolDef] = useState([
-    { field: "GSTNumber" },
-    { field: "Name" },
-    { field: "TotalQuatity" },
 
-    { field: "TotalAmount" },
-
-    { field: "Status" },
-    { field: "Action", cellRenderer: ProcessBtn, width: 500 },
-  ]);
   const [rowData, setRowData] = useState();
 
   useEffect(() => {
@@ -42,20 +38,108 @@ const ProcessInvoice = () => {
     
       setRowData(res.data);
     });
-  }, [showModal1]);
+  }, [showModal1,showModal]);
+
+
+
+const functbtnFunc=(props)=>{
+  console.log(props)
+  const buttonsave = () => {
+    let obj=props.data
+    obj["Status"]="Completed" 
+    console.log(obj)
+
+    setShowModal1(true)
+    setModalData(obj)
+    //   dispatch({
+    //     type:"SHOWMOADALCOMPBOOL",
+    //     payload:true
+    //   })
+
+
+    //  dispatch({
+    //     type:"AMOUNTDATA",
+    //     payload:obj
+    //   })
+
+      
+   
+};
+
+const onClickEditFun=()=>{
+    //  dispatch({
+    //   type:"SHOWMODAL",
+    //   payload:true
+    //  })   
+    setShowModal(true)
+    setEditFormData(props.data)
+    //  dispatch({
+    //   type:"MODALDATA",
+    //   payload:props.data
+    //  })
+}
+const onClickRemove =()=>{
+  console.log(props)
+  let payload={
+      "_id":""
+  };
+  payload["_id"]=props.data._id
+  console.log(payload)
+  axios.post(url+"removequote",payload).then((res)=>{
+      console.log(res)
+      props.api.setRowData(res.data)
+  })
+}
+
+return (
+  <span>
+   <div className='agButton'>
+    <button className="AdBtn" onClick={() => onClickRemove()}>Remove </button>
+    &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+    <button className="AdBtn" onClick={() => onClickEditFun()}>Edit </button>
+    &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+    <button className="AdBtn" onClick={() => buttonsave()}>Confirm </button>
+  </div>
+  </span>
+);
+};
+
+
+
+const [coldef, setcolDef] = useState([
+  { field: "GSTNumber" },
+  { field: "Name" },
+  { field: "TotalQuatity" },
+
+  { field: "TotalAmount" },
+
+  { field: "Status" },
+  { field: "Action", cellRenderer: functbtnFunc, width: 500 },
+]);
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
       <div className="processWrapper">
-        <h1>Processing Invoice</h1>
+        <h3>Processing Invoice</h3>
 
         <div className="ag-theme-alpine agTable" >
           <AgGridReact columnDefs={coldef} rowData={rowData} />
         </div>
 
-        <div>{showModal && <QuoteFormEdit />}</div>
+        <div>{showModal && <QuoteFormEdit show={showModal} setShowModal={setShowModal} editFormData={editFormData} />}</div>
         <div className="Button">
           <button
+          className="AdBtn"
             type="submit"
             onClick={() => {
               nav("/admin/invoice/generatedinvoice");
@@ -66,7 +150,7 @@ const ProcessInvoice = () => {
             GenearatedInvoice{" "}
           </button>
         </div>
-        <div>{showModal1 && <AmountModal />}</div>
+        <div>{showModal1 && <AmountModal show={showModal1} setShowModal1={setShowModal1} ModalData={ModalData}/>}</div>
       </div>
     </>
   );

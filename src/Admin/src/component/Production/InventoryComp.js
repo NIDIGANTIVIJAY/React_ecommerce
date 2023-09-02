@@ -5,6 +5,13 @@ import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 import { useNavigate } from "react-router";
 
+import DispatchComp from "./DispatchComp";
+import DailyProd from "./DailyProdComp"
+
+import DispatchData from "./DispatchData";
+
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 const InventoryComp=()=>{
     let date = new Date()
     let dateday = date.getDate()
@@ -80,20 +87,38 @@ const InventoryComp=()=>{
         })
     },[])
     const nav=useNavigate()
-    const navFun=()=>{
 
+    const navFun=()=>{
         nav("/admin/production/dailyprod" );
        }
-       const navFun1=()=>{
 
+
+       const navFun1=()=>{
         nav("/admin/production/dispatchprod");
        }
+
+
       
+
+       const onClicCompleteFun=(e)=>{
+        console.log(e)
+        if(e === "dailyprod"){
+         
+          setKey(e)
+    
+        }else{
+          setKey(e)
+    
+        }
+      
+      }
+  const [key, setKey] = useState('dailyprod');
+
 
 
 
     return(<>
-    <div style={{display:"flex" ,flexDirection:"row" ,gap:"4px"}}>
+    {/* <div style={{display:"flex" ,flexDirection:"row" ,gap:"4px"}}>
     <div className="ag-theme-alpine agTable" >
     <AgGridReact columnDefs={coldef} 
       rowSelection={'multiple'}
@@ -110,12 +135,35 @@ const InventoryComp=()=>{
     </div>
 
         
-    </div>
+    </div> */}
+
+<h3>Production</h3>
+    <Tabs
+      defaultActiveKey= {key}
+      id="uncontrolled-tab-example"
+      className="mb-3"
+      onSelect={(e) =>onClicCompleteFun(e)}
+    >
+      <Tab eventKey="dailyprod" title="Daily Production">
+              <DailyProd/>
+      </Tab>
+      <Tab eventKey="dispacth" title="Today's Dispatch"  >
+      <h3>Today Dispatch  & Prod </h3>
+             <DispatchComp/>
+      </Tab>
+      <Tab eventKey="Totaldispacth" title="Prod & Dispatch"  >
+      <h3>Dispatch  & Prod </h3>
+      {key === "Totaldispacth" &&   <DispatchData/> }
+    
+         
+      </Tab>
+     
+    </Tabs>
    
-    <div className="Button">
+    {/* <div className="Button">
     <button className="AdBtn" type="submit" onClick={()=>{navFun1()}}>Dispatch Production</button>
     <button className="AdBtn" type="submit" onClick={()=>{navFun() } }> Daily Production</button>
-    </div>
+    </div> */}
 
 
     </>)
