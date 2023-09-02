@@ -1,5 +1,6 @@
 .profile {
-    margin: 5rem 0rem 0rem 0rem;
+    /* margin: 5rem 0rem 0rem 0rem; */
+    margin: 0rem auto;
     padding: 1rem;
     text-align: center;
     background-color: #f4f0fa;
@@ -16,7 +17,7 @@
     background-color: #f4f0fa;
   }
   .initialauth {
-    margin-left: 23rem;
+    margin: 0rem auto;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
     width: 44rem;
     border-radius: 8px;
@@ -97,5 +98,18 @@
     border: 2px solid;
     border-radius: 8px;
 }
+
+@media screen and (max-width: 600px) {
+  .profile {
+    padding: 0rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .initialauth {
+    padding: 0.4rem;
+  }
+}
+
   
   

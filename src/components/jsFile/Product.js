@@ -115,7 +115,7 @@ const Product = () => {
                   className={`${classes.productBoximg} ${classes.commonStyle}`}
                 >
                   <img
-                    src={url + `productimg/${product?.productId}`}
+                    src={url + `productimg/${product?.ProductUniqId}`}
                     alt=""
                     width="300px"
                     height="170px"
