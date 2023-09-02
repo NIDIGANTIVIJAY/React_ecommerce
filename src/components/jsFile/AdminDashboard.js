@@ -267,7 +267,7 @@ const Contact = (props) => {
     
         <main className={classes.auth1}>
 
-          <img className={classes.img}  src={url+`productimg/${previewData?.productId}` } alt="img" />
+          <img className={classes.img}  src={url+`productimg/${previewData?.ProductUniqId}` } alt="img" />
           <div className={classes.tableContainer}>
             <table className={classes.admTable}>
               <tr className={classes.admTable}>

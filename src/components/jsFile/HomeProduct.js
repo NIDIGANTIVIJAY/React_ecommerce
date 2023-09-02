@@ -11,7 +11,6 @@ const Product = () => {
   const [show, setShow] = useState(false)
   useEffect(()=>{
     axios.get(url+"jsonData").then((res)=>{
-      console.log(res.data[0].ProductUniqId  ,"pPOKKJGHG"      )
       setProduct(res.data)
     })
  },[])
@@ -22,10 +21,6 @@ const onInterested = ()=>{
 
   // console.log(product, "pro");
   return (
-    <>
-    {product 
-      &&
-      <>
     <div className={classes.product}>
       <div className={classes.gridContainer}>
         {product?.map((product, index) => (
@@ -38,7 +33,6 @@ const onInterested = ()=>{
 
                 <div className={classes.homeproductBoxdetail}>
                   <h2>Product Details:</h2>
-                  ${product?.ProductUniqId}
 
                   <div className={classes.tableContainer}>
                     <table className={classes.admTable}>
@@ -85,9 +79,7 @@ const onInterested = ()=>{
         }
       </div>
 
-    </div> 
-    </> }
-    </>
+    </div>
   );
 };
 
