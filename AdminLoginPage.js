@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import classes from "../cssFile/Auth.module.css";
+import classes from "./src/components/cssFile/Auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AdminDash from "../jsFile/AdminDashboard"
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { LoginFun } from "../../store/action/Login";
+import { LoginFun } from "./store/action/Login";
 
 
-const Auth = (props) => {
+const AdminLoginPage = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [token,setToken]=useState()
@@ -20,7 +19,18 @@ const Auth = (props) => {
 const onSuccessfun=(res)=>{
       console.log("in success",res)
       if(res.status === 200){
-        nav("/adminDashboard"); 
+        if(res.data?.user?.token !== undefined){
+            dispatch({
+                type:"TOKEN",
+                payload:res?.data?.user?.token[0]?.token
+               })
+               
+               dispatch({
+                type:"LOGIN",
+                payload:true
+               })
+          }
+        nav("/Admin/Dashboard"); 
       }
 }
   const onClickloginFun = (e) => {
@@ -56,7 +66,7 @@ const onSuccessfun=(res)=>{
 
   return (
     <>
-    { token === undefined ?
+   
     <main className={classes.auth}>
       <main className={classes.auth1}>
         <section>
@@ -82,15 +92,23 @@ const onSuccessfun=(res)=>{
             </div>
           </form>
         </section>
+        <span>
+          <span className={classes.sigupText}>
+            
+       {/* <p style={{color:"aqua"}}>{"Create a Account?"}</p>  <Link to="/signup">Signup</Link>  */}
+       
+       </span>
+      </span>
+     
       </main>
-    </main> :
-
-    <AdminDash token={token}/>
+     
+    </main> 
+     
     
-    }
+   
 
     </>
   );
 };
 
-export default Auth;
+export default AdminLoginPage;
