@@ -19,20 +19,20 @@ import { useNavigate } from "react-router-dom";
 const AmountModal = (props) => {
   const url = process.env.REACT_APP_SERVICE_ID
   const dispatch = useDispatch()
-  // const  showModal= useSelector((state) => state.Common.showModalComp1)
-  // const ModalData = useSelector((state) => state.Common.AmountData)
-  // console.log(showModal,"showModalComp1")
+  const  showModal= useSelector((state) => state.Common.showModalComp1)
+  const ModalData = useSelector((state) => state.Common.AmountData)
+  console.log(showModal,"showModalComp1")
 
 
 
 
   const onCloseFun = () => {
 
-    // dispatch({
-    //     type:"SHOWMOADALCOMPBOOL",
-    //     payload:false
-    //   })
-  props.setShowModal1(false)
+    dispatch({
+        type:"SHOWMOADALCOMPBOOL",
+        payload:false
+      })
+
 
 
   }
@@ -48,27 +48,22 @@ const AmountModal = (props) => {
       "AmountPaid": "",
       "TotalAmount": "",
       "TotalQuatity": "",
-      "_id":"",
-      "ProductUniqId":""
+      "_id":""
     }
     payloadData["AmountPaid"] = AmountPaid
-    payloadData["GSTNumber"] = props.ModalData["GSTNumber"]
-    payloadData["Name"] = props.ModalData["Name"]
-    payloadData["Status"] = props.ModalData["Status"]
-    payloadData["productIdArr"] = props.ModalData["productIdArr"]
-    payloadData["InvoiceProduct"] =props.ModalData["InvoiceProduct"]
-    payloadData["_id"]=props.ModalData["_id"]
-  payloadData["ProductUniqId"]=props.ModalData["ProductUniqId"]
+    payloadData["GSTNumber"] = ModalData["GSTNumber"]
+    payloadData["Name"] = ModalData["Name"]
+    payloadData["Status"] = ModalData["Status"]
+    payloadData["productIdArr"] = ModalData["productIdArr"]
+    payloadData["InvoiceProduct"] = ModalData["InvoiceProduct"]
+    payloadData["_id"]=ModalData["_id"]
+
     console.log(payloadData)
     axios.post(url+"savequoteData",payloadData).then((res)=>{
         console.log(res)
-          if(res.status === 200){
-            props.setShowModal1(false)
-
-          }
        
     })
-
+   onCloseFun()
   }
 
   const [AmountPaid,setAmountPaid]=useState()
@@ -77,7 +72,7 @@ const AmountModal = (props) => {
 
 
     <Modal
-      show={props.show}
+      show={showModal}
       onHide={onCloseFun}
       aria-labelledby="ModalHeader"
       centered
@@ -87,8 +82,8 @@ const AmountModal = (props) => {
 
       </Modal.Header>
       <Modal.Body>
-        <label style={{paddingRight: "12px"}} >Initial Paid Amount</label>
-        <input type="text" onChange={(e)=>{setAmountPaid(e.target.value)}} />
+
+          <input type="text" onChange={(e)=>{setAmountPaid(e.target.value)}} />
           
 
 

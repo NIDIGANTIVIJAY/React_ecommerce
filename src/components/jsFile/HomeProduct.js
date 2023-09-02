@@ -11,6 +11,7 @@ const Product = () => {
   const [show, setShow] = useState(false)
   useEffect(()=>{
     axios.get(url+"jsonData").then((res)=>{
+      console.log(res.data[0].ProductUniqId  ,"pPOKKJGHG"      )
       setProduct(res.data)
     })
  },[])
@@ -21,6 +22,10 @@ const onInterested = ()=>{
 
   // console.log(product, "pro");
   return (
+    <>
+    {product 
+      &&
+      <>
     <div className={classes.product}>
       <div className={classes.gridContainer}>
         {product?.map((product, index) => (
@@ -28,11 +33,12 @@ const onInterested = ()=>{
             <div className={classes.gridItem}>
               <div className={classes.homeproductBox}>
                 <div className={classes.homeproductBoximg}>
-                  <img src={url+`productimg/${product?.productId}` }alt="image"  />
+                  <img src={url+`productimg/${product?.ProductUniqId}` }alt="image"  />
                 </div>
 
                 <div className={classes.homeproductBoxdetail}>
                   <h2>Product Details:</h2>
+                  ${product?.ProductUniqId}
 
                   <div className={classes.tableContainer}>
                     <table className={classes.admTable}>
@@ -79,7 +85,9 @@ const onInterested = ()=>{
         }
       </div>
 
-    </div>
+    </div> 
+    </> }
+    </>
   );
 };
 

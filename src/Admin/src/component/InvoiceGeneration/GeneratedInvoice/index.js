@@ -19,9 +19,8 @@ const GenearatedInvoice = () => {
     { field: "TotalAmount" },
 
     { field: "AmountPaid" },
-    { field: "DueAmount" },
+    
     { field: "Status" }
-   
 
   ])
   const [rowData, setRowData] = useState()

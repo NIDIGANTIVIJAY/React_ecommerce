@@ -37,8 +37,6 @@
   display: flex;
   flex-direction: column;
 }
-
-
 .content-view {
   width: 80%;
   margin-top: -2rem;
@@ -51,7 +49,7 @@
 }
 
 .sideBarBtn {
-  border: 2px solid black;
+  border: 1px solid black;
   background-color: gainsboro;
   padding: 8%;
   justify-content: center;
@@ -61,79 +59,9 @@
   margin-bottom: 0%;
   font-size: 18px;
   font-weight: 600;
-  cursor: pointer;
 }
 
-.sideBarBtn:hover{
-  border: 2px solid #ffa600;
-  background-color: white;
-  color: #ffa600;
-}
 
-.sideBarBtnActive{
-  border: 2px solid #ffa600;
-  background-color: white;
-  color: #ffa600;
-}
-
-.dashboardHeaderWrapper{
-  display: flex;
-    justify-content: space-between;
-    margin: 20px 0px 0px;
-}
-
-.dashboardContentView{
-  width: 100%;
-  height: 76vh;
-  background-color: rgb(255, 255, 255);
-  background-color: #cccccc;
-}
-
-.RowWrapp{
-  display: flex;
-  width: 100%;
-  height: 41vh;
-  /* border: 1px solid; */
-}
-.RowWrapp2{
-  display: flex;
-  width: 100%;
-  height: 37vh;
-  /* border: 1px solid; */
-}
-.BarDiv{
-  width: 70%;
-    border: 2px solid #a19d9d;
-    border-radius: 10px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    margin: 6px;
-}
-.TableDiv{
-  width: 70%;
-  border: 2px solid #a19d9d;
-    border-radius: 10px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    margin: 6px;
-overflow: hidden;
-
-}
-
-.TableDiv .ag-theme-alpine, .TableDiv .agTable{
-height: 100%;
-}
-
-.TableDiv .ag-root-wrapper.ag-layout-normal {
-  height: 100%;
-  
-}
-.pieDiv{
-  width: 30%;
-  border: 2px solid #a19d9d;
-    border-radius: 10px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    margin: 6px;
-
-}
 
 .sideBarBtn:hover {
   /* transform: scale(1.09); */
@@ -149,7 +77,6 @@ height: 100%;
   height: 2.6rem;
   display: flex;
   gap: 10px;
-  justify-content: right;
 }
 
 .Button button {
@@ -163,13 +90,13 @@ height: 100%;
   padding: 6px 20px;
 }
 
-.AdBtn {
+button {
   background-color: rgb(128, 129, 105);
   color: white;
   border: 2px solid white;
 }
 
-.AdBtn:hover {
+button:hover {
   background-color: rgb(140, 141, 110);
   color: white;
   border: 2px solid white;
@@ -183,14 +110,12 @@ height: 100%;
   height: 35px;
   border-radius: 5px;
   margin-right: 8px;
-  cursor: pointer;
 }
 
 .logoImg{
   width: 45px;
     height: 45px;
     margin-top: 5px;
-    cursor: pointer;
 }
 
 .spanline {
@@ -215,69 +140,11 @@ height: 100%;
   gap: 10px;
 }
 
-.ModalUserCreate .modal-footer{
-  justify-content: right;
-  background-color: #cccccc;
+.inputLabel{
+  width: 120px !important;
+margin-bottom: 10px;
 }
 
-.updateAmt{
-  padding: 0px 15px;
-}
-
-.dueAmtValue{
-  width: 100px;
-  height: 30px;
-  color: green;
-  font-weight: 500;
-}
-
-.ListNameHeader{
-  margin: 10px 0px;
-  font-weight: bold;
-}
-
-.inputHeader{
-  font-weight: bold;
-  /* margin-bottom: 10px; */
-}
-
-.LableDiv{
-  margin: 10px 0px;
-}
-
-.LableDiv label {
-  width: 110px;
-  margin: 6px;
-}
-
-
-.LableDivEdit label {
-  width: 70px;
-  margin: 6px;
-}
-
-.LableDivEdit input {
-  margin-right: 90px;
-}
-
-/* .ModalUserCreate .modal-header{
-  background-color: #cccccc;
-} */
-
-.nav-link {
-  --bs-nav-link-color: black !important;
-  font-weight: 500;
-}
-
-.nav-item button:hover{
-  background-color: rgb(140, 141, 110);
-  color: white;
-}
-
-.HeaderText{
-  font-size: 22px;
-  font-weight: 600;
-}
 
 
 @media screen and (max-width: 600px) {
@@ -288,32 +155,9 @@ height: 100%;
       margin-top: 3px;
   }
 
-  .dashboardContentView{
-    height: 122vh;
-  }
-
-  .RowWrapp, .RowWrapp2{
-    display: block;
-  }
-
-  .BarDiv, .TableDiv, .pieDiv{
-    width: 100%;
-    height: 100%;
-  }
-
-  .BarDiv{
-    display: none;
-  }
-
-  .HeaderText{
-    font-size: 19px;
-    font-weight: 600;
-  }
-
-.nav-link {
-  --bs-nav-link-padding-x: 0.7rem;
-  --bs-nav-link-padding-y: 0.4rem;
-}
+  /* .modal-content{
+  width: 400px !important;
+} */
 
   .list {
     display: none;
