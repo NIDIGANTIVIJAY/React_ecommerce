@@ -12,12 +12,17 @@ const initialState = {
   showModalComp1: false,
   AmountData: "",
   AccountName : "pending",
-  payloadData:[]
+  payloadData:[],
+  Notitype:"",
+  NotiMessg:"",
+  showLoader:false,
+  rowData:""
 
 
 };
 
 const Common = (state = initialState, action) => {
+  console.log(action,"hHHHH")
   switch (action.type) {
 
 
@@ -88,6 +93,21 @@ const Common = (state = initialState, action) => {
         ...state,
         formatedArray: state.formatedArray.concat(action.payload)
       }
+      
+
+
+
+      case Type.ROWDATA:
+        console.log(action.payload, initialState.processingArray, "processingArray");
+       
+        return {
+          ...state,
+          rowData: action.payload
+        }
+
+
+
+
 
     case Type.REMOVEITEMS:
       console.log(action.payload,state.formatedArray.filter((i)=> i?.ProductUniqId !== action?.payload.ProductUniqId    ), "ppo");
@@ -133,15 +153,35 @@ const Common = (state = initialState, action) => {
       }
     
       case Type.UPDATEPAYLOAD:
-        console.log(action.payload, state.AccountName, "AccountName");
-     
+        console.log( state.payloadData.map(item =>
+          (item.ProductUniqId === action.payload.ProductUniqId  && item.MonthDates === action.payload.MonthDates)? { ...item, todayProd: action.payload.todayProd } : item
+        ),"IN REDUCER")
+      
       return {
         ...state,
         payloadData:  state.payloadData.map(item =>
-          (item.stockId === action.payload.stockId  && item.MonthDates === action.payload.MonthDates)? { ...item, todayProd: action.payload.todayProd } : item
+          (item.ProductUniqId === action.payload.ProductUniqId  && item.MonthDates === action.payload.MonthDates)? { ...item, todayProd: action.payload.todayProd } : item
         ),
       }
-    
+
+      case Type.NOTIFICATIONMSG:
+      
+      return {
+        ...state,
+        NotiMessg: action.payload
+      }
+      case Type.NOTIFICATIONTYPE:
+      
+      return {
+        ...state,
+        Notitype: action.payload
+      }
+      case Type.SHOWLOADER:
+      
+      return {
+        ...state,
+        showLoader: action.payload
+      }
 
     default:
       return state

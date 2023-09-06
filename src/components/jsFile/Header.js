@@ -26,7 +26,7 @@ const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-
+      <NavLink to="/">
         <div className={classes.headerBox} >
           <img className={classes.logoImg} src={amwLogo} alt="amwLogo" />
         <h1> 
@@ -34,6 +34,7 @@ const Header = (props) => {
 
         </h1>
         </div>
+        </NavLink>
 
         <div className={classes.toggelerContainer} onClick={()=> toggelerFun()}>
           <span className={classes.spanline}></span>
@@ -46,7 +47,7 @@ const Header = (props) => {
           <ul >
              
             <li >
-              <NavLink className={location.pathname==='/' ? "activeClass" : ""} to="/">Home</NavLink>
+              <NavLink className={location.pathname ==='/' ? "activeClass" : ""} to="/">Home</NavLink>
             </li>
             <li>
               <NavLink

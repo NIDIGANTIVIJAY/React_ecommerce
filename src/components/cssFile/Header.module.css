@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3c0080 !important;
+  background-color: #13244f !important;
   color: white;
   padding: 0 4%;
   position: fixed;
@@ -42,7 +42,9 @@
 
 .header a:hover,
 .header a:active {
-  color: #b864da;
+  /* color: #C7511F; */
+  color: #ffbb00;
+
 }
 
 .header button {
