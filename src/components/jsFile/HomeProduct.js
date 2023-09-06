@@ -41,12 +41,16 @@ const onInterested = ()=>{
                         <td className={classes.admtd}>{product?.product}</td>
                       </tr>
                       <tr className={classes.admTable}>
-                        <th className={classes.admth}>Size</th>
-                        <td className={classes.admtd}>{product?.size} Inch</td>
+                        <th className={classes.admth}>Size {"(Inch)"}</th>
+                        <td className={classes.admtd}>{product?.size}</td>
                       </tr>
                       <tr className={classes.admTable}>
-                        <th className={classes.admth}>Packaging Size</th>
-                        <td className={classes.admtd}>{product?.weight} Kg</td>
+                        <th className={classes.admth}>Price {"(Rs)"}</th>
+                        <td className={classes.admtd}>{product?.price}</td>
+                      </tr>
+                      <tr className={classes.admTable}>
+                        <th className={classes.admth}>Packaging Size {"(Kg)"}</th>
+                        <td className={classes.admtd}>{product?.weight}</td>
                       </tr>
                     </table>
                   </div>

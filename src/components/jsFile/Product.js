@@ -136,19 +136,19 @@ const Product = () => {
                         <td className={classes.admtd}>{product?.item}</td>
                       </tr>
                       <tr className={classes.admTable}>
-                        <th className={classes.admth}>Size</th>
+                        <th className={classes.admth}>Size {"(Inches)"}</th>
                         <td className={classes.admtd}>{product?.size}</td>
                       </tr>
                       <tr className={classes.admTable}>
-                        <th className={classes.admth}>Price</th>
+                        <th className={classes.admth}>Price {"(Rs)"}</th>
                         <td className={classes.admtd}>{product?.price}</td>
                       </tr>
-                      <tr className={classes.admTable}>
+                      {/* <tr className={classes.admTable}>
                         <th className={classes.admth}>Quantity</th>
                         <td className={classes.admtd}>{product?.quantity}</td>
-                      </tr>
+                      </tr> */}
                       <tr className={classes.admTable}>
-                        <th className={classes.admth}>Packaging Size</th>
+                        <th className={classes.admth}>Packaging Size {"(Kg)"}</th>
                         <td className={classes.admtd}>{product?.weight}</td>
                       </tr>
                     </table>
@@ -159,7 +159,7 @@ const Product = () => {
               <div
                 className={`${classes.productBoxDescription} ${classes.commonStyle1}`}
               >
-                <p>{product.description}</p>
+                <p className={classes.disText}>{product.description}</p>
                 <div className={classes.productBtnContainer}>
                   <button
                     className={classes.btn1}

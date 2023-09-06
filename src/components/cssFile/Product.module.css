@@ -13,6 +13,10 @@
     text-align: left;
     background-color: #fbfbfb;
   }
+
+.disText{
+  height: 160px;
+}
 .productCard{
     margin-top: 16px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
@@ -104,6 +108,10 @@
         
     }
 
+    .disText{
+        height: max-content;
+      }
+
     .commonStyleWrapper{
         width: 100%;
     }
@@ -120,6 +128,8 @@
 }
 
 @media screen and (max-width: 800px) {
+
+    
 
     .product1 {
         padding: 0.05rem 1rem 2rem 1rem;

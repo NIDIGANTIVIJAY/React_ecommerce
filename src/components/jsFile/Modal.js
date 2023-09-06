@@ -73,7 +73,7 @@ const ModalComp = (props) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={(e) => initModal(e)}>
+          <Button className="AdBtn" variant="success" onClick={(e) => initModal(e)}>
             Submit Now
           </Button>
         </Modal.Footer>

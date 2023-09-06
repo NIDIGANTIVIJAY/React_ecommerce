@@ -6,7 +6,18 @@ import AdminLoginPage from "./AdminLoginPage"
 import { Navigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import AuthWrapper from "./Authwraper";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import LoaderModal from "./Admin/src/component/LoaderModal";
 const Connector=()=>{
+    const type=useSelector((state)=>state.Common.Notitype)
+    const message=useSelector((state)=>state.Common.NotiMessg)
+   const showLoader=useSelector((state)=>state.Common.showLoader)
+     console.log(showLoader,"SHOWLOADER")
+   useEffect(()=>{
+    console.log(showLoader,"SHOWLOADER1")
+   },[message,type,showLoader])
   
    
      
@@ -27,6 +38,10 @@ const Connector=()=>{
  
    
  </Routes>
+
+ <ToastContainer />
+ {showLoader && <LoaderModal showLoader={showLoader} />}
+ 
 
 
     </>

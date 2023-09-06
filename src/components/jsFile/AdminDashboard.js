@@ -98,7 +98,7 @@ const Contact = (props) => {
     const headers = {
       "Content-Type": "form-data"
     };
-      axios.post(url+ "upload/data",formData,headers).then((res)=>{
+    axios.post("upload/data",formData,headers).then((res)=>{
         console.log(res)
       })
       console.log(payloadData,"Payload Data")
@@ -124,7 +124,7 @@ const Contact = (props) => {
     let obj={
       "productId":payloadData?.productId
     }
-    axios.post(url+"getqotation",obj).then((res)=>{
+    axios.post("getqotation",obj).then((res)=>{
         console.log(res.data)
         setPreviewData(res.data)
         const arr= new Uint8Array(res.data.imageData)

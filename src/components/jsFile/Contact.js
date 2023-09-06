@@ -1,10 +1,32 @@
-import React from "react";
+import React,{useState} from "react";
 import classes from "../cssFile/Contact.module.css";
 import location from "../Assets/placeholder.png";
 import contact from "../Assets/receiver.png";
 import email from "../Assets/email.png";
+import axios from "axios";
 
 const Contact = () => {
+  const [phno,setPhone]=useState()
+  const [desc,setDes]=useState()
+  const [Name,setName]=useState()
+
+    console.log(desc,phno,Name)
+  const url =process.env.REACT_APP_SERVICE_ID
+
+  const onSubmitFun=(e)=>{
+    e.preventDefault()
+    let payload = {
+      phno: phno,
+      desc: desc,
+      name:Name
+    };
+    axios.post(url + "sendEmail", payload).then((res) => {
+      console.log(res);
+
+    });
+
+  }
+ 
   
   return (
     <main className={classes.profile}>
@@ -46,6 +68,8 @@ const Contact = () => {
                 id="name"
                 required
                 placeholder="Enter your name..."
+                onChange={(e)=>{setName(e.target.value)}}
+
               />
             </div>
             <div className={classes.control}>
@@ -55,6 +79,7 @@ const Contact = () => {
                 id="contact"
                 required
                 placeholder="Enter a valid mobile no..."
+                onChange={(e)=>{setPhone(e.target.value)}}
               />
             </div>
             <div className={classes.control}>
@@ -66,9 +91,10 @@ const Contact = () => {
                 // cols="62"
                 rows="2"
                 placeholder="Please write your query..."
+                onChange={(e)=>{setDes(e.target.value)}}
               ></textarea>
             </div>
-            <button className={classes.btn}>Submit Now</button>
+            <button className={classes.btn} onClick={(e)=>{onSubmitFun(e)}}> Submit Now</button>
           </form>
         </section>
       </main>
