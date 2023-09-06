@@ -7,7 +7,7 @@ import  "./processing.css"
 import "ag-grid-community/styles//ag-grid.css";
 import "ag-grid-community/styles//ag-theme-alpine.css";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import parse from "html-react-parser";
 import ProcessBtn from "./ProcessBtn";
 import QuoteFormEdit from "./quoteFormEdit";
@@ -15,9 +15,12 @@ import { Button, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import GenearatedInvoice from "../GeneratedInvoice";
 import AmountModal from "./AmountModal";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axiosInstance from "../../axiosconfig";
 const ProcessInvoice = () => {
   const nav = useNavigate();
+  const dispatch=useDispatch()
   // const showModal = useSelector((state) => state.Common.showModal);
   // const showModal1 = useSelector((state) => state.Common.showModalComp1);
 const [showModal,setShowModal]=useState(false)
@@ -32,12 +35,28 @@ const [showModal1,setShowModal1]=useState(false)
   const [rowData, setRowData] = useState();
 
   useEffect(() => {
-    axios.get(url + "getpendingquote").then((res) => {
+    dispatch({
+      type:"SHOWLOADER",
+      payload:true
+    })
+    axiosInstance.get("getpendingquote").then((res) => {
       console.log(res.data);
-
+            if(res.status === 200){
+              dispatch({
+                type:"SHOWLOADER",
+                payload:false
+              })
+            }
     
       setRowData(res.data);
-    });
+    }).catch((e)=>{
+      console.log(e)
+      toast.error('Something went Wrong', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+     
+
+  });
   }, [showModal1,showModal]);
 
 
@@ -51,16 +70,7 @@ const functbtnFunc=(props)=>{
 
     setShowModal1(true)
     setModalData(obj)
-    //   dispatch({
-    //     type:"SHOWMOADALCOMPBOOL",
-    //     payload:true
-    //   })
-
-
-    //  dispatch({
-    //     type:"AMOUNTDATA",
-    //     payload:obj
-    //   })
+    
 
       
    
@@ -85,9 +95,20 @@ const onClickRemove =()=>{
   };
   payload["_id"]=props.data._id
   console.log(payload)
-  axios.post(url+"removequote",payload).then((res)=>{
+  dispatch({
+    type:"SHOWLOADER",
+    payload:true
+  })
+  axiosInstance.post("removequote",payload).then((res)=>{
       console.log(res)
+      if(res.status === 200){
       props.api.setRowData(res.data)
+
+        dispatch({
+          type:"SHOWLOADER",
+          payload:false
+        })
+      }
   })
 }
 
@@ -109,12 +130,12 @@ return (
 const [coldef, setcolDef] = useState([
   { field: "GSTNumber" },
   { field: "Name" },
-  { field: "TotalQuatity" },
+  { field: "TotalQuatity", width: 150 },
 
-  { field: "TotalAmount" },
+  { field: "TotalAmount", width: 150 },
 
-  { field: "Status" },
-  { field: "Action", cellRenderer: functbtnFunc, width: 500 },
+  { field: "Status" , width: 150},
+  { field: "Action", cellRenderer: functbtnFunc, width: 390 },
 ]);
 
 
@@ -132,7 +153,7 @@ const [coldef, setcolDef] = useState([
       <div className="processWrapper">
         <h3>Processing Invoice</h3>
 
-        <div className="ag-theme-alpine agTable" >
+        <div className="ag-theme-alpine agTable Ag-InvoiceTable" >
           <AgGridReact columnDefs={coldef} rowData={rowData} />
         </div>
 

@@ -1,25 +1,37 @@
 import React from 'react';
 import { useDispatch,useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AggridBtn =(props) => {
    const dispatch=useDispatch()
    const processData=useSelector((state)=>state.Common.processingArray
     )
     const formatArr=useSelector((state)=>state.Common.formatedArray)
+    const rowData=useSelector((state)=>state.Common.rowData)
 
-    console.log(props.params,"SDEF")
+    console.log(props.data,"SDEF")
   const buttonClicked = () => {
-    //  console.log(formatArr,"FGGG")
-    //  let data;
-    //  let arr=[]
-    //   arr= formatArr.filter((i)=> i?.ProductUniqId === props.data.ProductUniqId )
-    //   if(arr.length > 0 ){
-    //     console.log( arr)
-    //     data=arr
-    //   }else{
-    //     data=props.data
+    console.log(formatArr,rowData,"FGGG")
+   
+   
 
-    //   }
+    if(props.params.data.Price === null){
+      toast.error('Please Enter the Price', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+    return
+    }
+    if(props.params.data.Quantity === null){
+      toast.error('Please Enter the Quantity', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+      return
+      
+    }
+  
+     
+  
   
   
   
@@ -48,7 +60,7 @@ const AggridBtn =(props) => {
         payload:copiedObject
       }
     )
-    alert(`Item is Added SuccessFully${props.params.data.ProductId}`);
+    alert(`Item is Added SuccessFully  Product: ${props.params.data.Product}  Size : ${props.params.data.Size}`);
   };
  const OnRemoveFun=()=>{
   console.log("In the Remove Function")
@@ -70,9 +82,9 @@ const AggridBtn =(props) => {
     <span>
      <div className='agButton'>
         {props.params.data.shouldShowButton === true ?
-      <button className='AdBtn' style={{backgroundColor: "#64d764",width: "76%"
+      <button className='AdBtn' style={{backgroundColor: "rgb(68, 185, 130)",width: "76%"
     }} onClick={() => buttonClicked()}>Add Item </button> :
-      <button style={{backgroundColor:"#ff580dcf"}} onClick={() => OnRemoveFun()}>Remove Item </button> }
+      <button style={{backgroundColor:"rgb(251, 170, 19)"}} onClick={() => OnRemoveFun()}>Remove Item </button> }
       </div>
     </span>
   );

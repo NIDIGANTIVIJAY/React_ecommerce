@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-
+import axiosInstance from "../axiosconfig";
 
 const ModalComp = (props) => {
     const [stockName, setStockName] = useState("")
@@ -14,7 +14,6 @@ const ModalComp = (props) => {
   const url=process.env.REACT_APP_SERVICE_ID
   const currentDate = new Date();
 const [currentMonth] = useState(currentDate.getMonth()+1); 
-
 
     const onclickSubmitFun = () => {
         
@@ -34,7 +33,7 @@ const [currentMonth] = useState(currentDate.getMonth()+1);
             return [...prev, obj]
         })
        
-        axios.post(url+"createStock",obj).then((res)=>{
+        axiosInstance.post("createStock",obj).then((res)=>{
             if(res.status === 200 ){
            
                 sethsnNum("")
@@ -90,8 +89,8 @@ const [currentMonth] = useState(currentDate.getMonth()+1);
 
             </Modal.Body>
             <Modal.Footer>
-                <Button type="submit" onClick={() => { onclickSubmitFun() }} >Add stock </Button>
-                <Button type="submit" onClick={() => { onClickSubmit() }} >submit </Button>
+                <Button className="AdBtn" type="submit" onClick={() => { onclickSubmitFun() }} >Add stock </Button>
+                <Button className="AdBtn" type="submit" onClick={() => { onClickSubmit() }} >submit </Button>
             </Modal.Footer>
 
         </Modal>

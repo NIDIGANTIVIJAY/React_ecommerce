@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 const InputCompJS = (props) => {
     let enableRead = props.enable
@@ -6,9 +6,15 @@ const InputCompJS = (props) => {
     const [payload1, setpayload1] = useState([])
     const pay = useSelector((state) => state.Common.payloadData)
     const dispatch = useDispatch()
+    const [monthData, setMonthData] = useState()
+
+   
+
+
+
     const onChangeFun = (e) => {
 
-        console.log("KK", pay)
+        console.log("KK", pay, props)
 
         if (pay.some((i) => i?.ProductUniqId
             === props.params.data.ProductUniqId
@@ -16,7 +22,8 @@ const InputCompJS = (props) => {
 
 
 
-
+            console.log("KKIGH", pay.some((i) => i?.ProductUniqId
+                === props.params.data.ProductUniqId))
             if (pay.some((i) => i?.ProductUniqId
                 === props.params.data.ProductUniqId
                 && i.MonthDates === props.params.column.colId)) {
@@ -26,13 +33,19 @@ const InputCompJS = (props) => {
 
                 let obj = {}
                 obj["ProductUniqId"] = props.params.data.ProductUniqId
-
                 let s = props.params.colDef.field.split("/")
                 console.log(s)
                 obj["Month"] = s[1]
+
+
                 obj["MonthDates"] = props.params.colDef.field
+
+
                 obj["todayProd"] = e.target.value
                 obj["year"] = s[2]
+
+                console.log(obj, "PPs")
+
                 dispatch({
                     type: "UPDATEPAYLOAD",
                     payload: obj
@@ -145,12 +158,18 @@ const InputCompJS = (props) => {
             })
 
         }
-
     }
     return (<>
+        
 
+       {props.params.data[ props.params.colDef.headerName] !== undefined ?
+        <input type="number" readOnly={!enableRead} defaultValue={props.params.data[ props.params.colDef.headerName] } onChange={(e) => { onChangeFun(e) }} />
+       :
+       <input type="number" readOnly={!enableRead} onChange={(e) => { onChangeFun(e) }} />
 
-        <input type="number" readOnly={!enableRead} onChange={(e) => { onChangeFun(e) }} />
+    
+    }
+
     </>)
 
 }

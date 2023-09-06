@@ -4,20 +4,20 @@ import { AgGridReact } from 'ag-grid-react';
 import axios from "axios";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
-import ModaComponent from "./ModalCompon";
+import axiosInstance from "../axiosconfig";
+
 import "../../../../components/cssFile/Sales.module.css"
 import * as xlsx from "xlsx";
 import { useNavigate } from "react-router-dom";
 
 import c3 from "c3";
+import * as d3 from "d3"
 // import c3 from "c3";
 
 import Barchrt from "../Dashboard/Barchart"
 import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
-
-  const [showModal, setModal] = useState(false)
 
   const [jsonData, setJsonData] = useState([]);
 
@@ -107,6 +107,11 @@ const Dashboard = () => {
 
       }
     },
+
+    size: {
+      height: 280,
+      width: 800
+  },
     color: {
       pattern: ["#1f77b4", "#aec7e8", "#ff7f0e"],
     },
@@ -141,6 +146,28 @@ const Dashboard = () => {
 
 
     },
+
+    tooltip: {
+      format: {
+          value: function (value, ratio, id) { 
+              return ("");
+          }
+      }
+  },
+
+    pie: {
+      label: {
+        format: function(value, ratio, id) {
+          return id;
+        }
+      }
+    },
+
+    size: {
+      height: 250,
+      width: 360
+  },
+
     color: {
       pattern: ["#e3edf7", "#fbaa13", "#44b982"],
     },
@@ -150,6 +177,8 @@ const Dashboard = () => {
       },
     },
   });
+
+
 
   var chart = c3.generate({
     bindto: "#pieChart2",
@@ -176,12 +205,30 @@ const Dashboard = () => {
 
       }
 
-
-
     },
+    size: {
+      height: 250,
+      width: 360
+  },
+
+    pie: {
+      label: {
+        format: function(value, ratio, id) {
+          return value;
+        }
+      }
+    },
+
     color: {
       pattern: ["#e3edf7", "#fbaa13", "#44b982"],
     },
+    tooltip: {
+      format: {
+          value: function (value, ratio, id) { 
+              return ("");
+          }
+      }
+  },
     bar: {
       width: {
         ratio: 0.5, // this makes bar width 50% of length between ticks
@@ -204,7 +251,7 @@ const Dashboard = () => {
 
     const buttonClicked = () => {
       console.log(props.data)
-      axios.post(url + "editData", props.data).then((res) => {
+      axiosInstance.post( "editData", props.data).then((res) => {
         setRowData(res.data)
 
       })
@@ -221,21 +268,21 @@ const Dashboard = () => {
     );
   };
   const [coldef, setcoldef] = useState([
-    { field: 'Item' },
-    { field: 'Description' },
-    { field: 'Size' },
-    { field: 'Product' },
+    { field: 'Item', width: 150 },
+    { field: 'Description', width: 150 },
+    { field: 'Size', width: 100 },
+    { field: 'Product', width: 150 },
     // { field: 'ProductId' },
-    { field: 'Price' },
-    { headerName: "Total Quatity", field: 'Quantity' },
-    { field: 'Weight' },
+    { field: 'Price', width: 100 },
+    { headerName: "Total Quatity", field: 'Quantity', width: 100 },
+    { field: 'Weight', width: 100 },
   ]);
   const [rowData, setRowData] = useState()
 
   // 
   useEffect(() => {
     let arr = []
-    axios.get(url + "jsonData").then((res) => {
+    axiosInstance.get("jsonData").then((res) => {
       console.log(res.data)
 
       res.data.map((i) => {
@@ -259,7 +306,7 @@ const Dashboard = () => {
 
     })
 
-    axios.get(url + "Dashboard").then((res) => {
+    axiosInstance.get("Dashboard").then((res) => {
       console.log(res.data)
 
 
@@ -306,11 +353,8 @@ const Dashboard = () => {
 
     <div className="dashboardHeaderWrapper" style={{ display: "flex" }}>
       <div><h3>Dashboard</h3></div>
-
-      <div className="Button" style={{ marginTop: "0rem" }}>
-        <button className="AdBtn" type="submit" onClick={() => { setModal(true) }}>Add User</button>
-      </div>
     </div>
+    
 
     <div className="dashboardContentView" >
       <div className="RowWrapp">
@@ -324,11 +368,11 @@ const Dashboard = () => {
               onChange={readUploadFile}
             />
           </form> */}
-          <div id="chart"></div>
-          {/* <Barchrt/> */}
+          <div className="barBox" id="chart"></div>
         </div>
         <div className="pieDiv">
-          <div id="pieChart"></div>
+          <h5 className="dashHeadeH5">Invoice</h5>
+          <div className="pieBox" id="pieChart"></div>
         </div>
       </div>
       <div className="RowWrapp2">
@@ -345,12 +389,12 @@ const Dashboard = () => {
 
 
         <div className="pieDiv">
-          <div id="pieChart2"></div>
+          <h5 className="dashHeadeH5">Account</h5>
+          <div className="pieBox" id="pieChart2"></div>
 
         </div>
       </div>
     </div>
-    {showModal && <ModaComponent show={showModal} setShowModal1={setModal} />}
 
   </>)
 }

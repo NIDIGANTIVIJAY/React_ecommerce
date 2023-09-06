@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { AgGridReact } from 'ag-grid-react';
-
+import axiosInstance from "../axiosconfig";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 
@@ -66,11 +66,14 @@ const ModaComponent = (props) => {
   const onclickSubmitFun = () => {
     console.log(payloadData, "payloadData");
 
-    axios.post(url+"createuserforAdmin",payloadData).then((res)=>{
+    axiosInstance.post("createuserforAdmin",payloadData).then((res)=>{
         console.log(res)
+        if(res.status===200){
+          props.setShowModal1(false)
+        }
        
     })
-    props.setShowModal1(false)
+    
 
   }
 

@@ -5,7 +5,7 @@ import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 
-
+import axiosInstance from "../../axiosconfig";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import parse from 'html-react-parser';
@@ -17,6 +17,8 @@ import "../../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import _ from 'lodash'
 import Select from 'react-select';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const QuoteFormEdit = (props) => {
   const url = process.env.REACT_APP_SERVICE_ID
   const dispatch = useDispatch()
@@ -30,10 +32,11 @@ const QuoteFormEdit = (props) => {
   // const showModal = useSelector((state) => state.Common.showModal)
 
   const [keys] = useState(Object.keys(props.editFormData?.InvoiceProduct[0]))
-  console.log(props.editFormData, keys)
+  console.log(props.editFormData, keys, "ghjk")
   const [productName, setproductName] = useState()
-
+  const [ShowproductName, setShowproductName] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
+
   const [showBtn, setShowBtn] = useState(false)
   const [payloadData, setPayloadData] = useState(props.editFormData)
   const [formData, setFormData] = useState(props.editFormData.InvoiceProduct)
@@ -43,7 +46,7 @@ const QuoteFormEdit = (props) => {
     if (jsonData === "") {
       dispatch(JsonData(onSuccess));
     }
-  }, [])
+  }, [selectedOption])
 
   const onSuccess = (res) => {
 
@@ -73,9 +76,9 @@ const QuoteFormEdit = (props) => {
   const OnclickFun = (e) => {
     e.preventDefault()
     console.log(payloadData, "xxxxx")
-    axios.post(url + "editquote", payloadData).then((res) => {
+    axiosInstance.post( "editquote", payloadData).then((res) => {
       console.log(res)
-      if(res.status === 200){
+      if (res.status === 200) {
         props.setShowModal(false)
       }
     })
@@ -83,94 +86,85 @@ const QuoteFormEdit = (props) => {
     //   type:"SHOWMODAL",
     //   payload:false
     //  }) 
-    
+
   }
 
   const OnclickEditFun = (e) => {
     e.preventDefault()
     let arr = []
     let arr1 = []
-    console.log(jsonData)
-    jsonData.map((i) => {
-
-
+    console.log(jsonData, payloadData, "YYYTYTYTY")
+    setShowproductName(true)
+    jsonData.map((j) => {
       let obj = { value: '', label: '' }
+      console.log(payloadData.InvoiceProduct.some((i) => console.log(i)))
+      if (payloadData.InvoiceProduct.some((i) => i.Size !== j.size)) {
+        obj["value"] = j.size
+        obj["label"] = j.product
+        arr.push(obj)
 
-
-
-      props.editFormData.InvoiceProduct.map((j) => {
-        if (j.Product !== i.product) {
-          obj["value"] = i.product
-          obj["label"] = i.product
-          arr.push(obj)
-
-        } else {
-          obj["value"] = i.product
-          obj["label"] = i.product
-          arr1.push(obj)
-
-        }
-      })
-
+      }
 
     })
 
-    setSelectedOption(arr1)
-
+    console.log(arr, "PLOLOPLO")
     setproductName(arr)
 
+    // jsonData.map((i) => {
+
+
+    //   let obj = { value: '', label: '' }
+
+
+
+    //   props.editFormData.InvoiceProduct.map((j) => {
+    //     if (j.Product !== i.product) {
+    //       obj["value"] = i.size
+
+    //       obj["label"] = i.product
+    //       arr.push(obj)
+
+    //     } else {
+    //       obj["value"] = i.size
+    //       obj["label"] = i.product
+    //       arr1.push(obj)
+
+    //     }
+    //   })
+
+
+    // })
+
+    // setSelectedOption(arr1)
+
+    // setproductName(arr)
 
 
 
 
-    //    axios.get(url+"getProductList").then((res)=>{
-    //     console.log(res)
 
-    //    let arr=[]
-    //    let arr1=[]
-    //     jsonData.data.map((i)=>{
-
-
-    //       let obj={ value: '', label: '' }
-
-
-
-    //       props.editFormData.InvoiceProduct.map((j)=>{
-    //         if(j.Product !== i.product){
-    //           obj["value"]=i.product
-    //           obj["label"]=i.product
-    //           arr.push(obj)
-
-    //         }else{
-    //           obj["value"]=i.product
-    //           obj["label"]=i.product
-    //           arr1.push(obj)
-
-    //         }
-    //       })
-
-
-    //     })
-    //     setSelectedOption(arr1)
-
-    //     setproductName(arr)
-
-    //  })
 
   }
   const OnclickAddNewItem = (e) => {
     e.preventDefault()
-    console.log(jsonData, "JsonData", selectedOption)
+    console.log( productName,"YYYTYTYTY")
+    console.log( "JsonData",productName, selectedOption)
+      if(selectedOption.value === ""){
+        toast.error(`Please Select the Option`, {
+          autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+        });
+        return
+      }
     let arr = []
     let JsonData = [...jsonData]
     let asd = payloadData.InvoiceProduct
     let sd = { ...payloadData }
 
     let obj = []
-
+    let arr1=[]
     const result = JsonData.filter((Item) => {
-      console.log(Item.product === selectedOption.value)
-      if (Item.product === selectedOption.value) {
+      console.log(Item.size === selectedOption.value)
+      if (Item.size === selectedOption.value) {
         let obj = {}
         obj['Item'] = Item.item
         obj['Description'] = Item.description
@@ -182,6 +176,26 @@ const QuoteFormEdit = (props) => {
         obj['Weight'] = Item.weight
         obj["ProductUniqId"] = Item.ProductUniqId
 
+
+
+        productName.map((j) => {
+          let obj = { value: '', label: '' }
+          if (Item.size  !== j.value) {
+            obj["value"] = j.value
+            obj["label"] = j.label
+            arr1.push(obj)
+    
+          }
+    
+        })
+
+
+
+
+     
+
+      
+
         sd.InvoiceProduct.push(obj)
         console.log("IN SD", sd)
         setPayloadData(sd)
@@ -189,6 +203,11 @@ const QuoteFormEdit = (props) => {
       }
     })
 
+    let obj1 = { value: '', label: '' }
+    setSelectedOption(obj1)
+  console.log(arr1,"KJNBG")
+    setproductName(arr1)
+    
     console.log(sd, "LLKJHdd")
 
 
@@ -228,65 +247,65 @@ const QuoteFormEdit = (props) => {
       size="xl"
     >
       <Modal.Header closeButton onClick={onCloseFun}>
-      <label className=" inputHeader">Invoice Edit</label>
+        <label className=" inputHeader">Invoice Edit</label>
       </Modal.Header>
       <Modal.Body>
         <form>
           <div className="LableDiv">
-          <label>GSTNumber</label>
-          <input type="text" defaultValue={props.editFormData.GSTNumber} onChange={(e) => { OnChangeFun(e, "GSTNumber") }} />
-          <br />
-          <label >Name</label>
-          <input type="text" defaultValue={props.editFormData.Name} onChange={(e) => { OnChangeFun(e, "Name") }} />
-          
-
-
-
-          <h4>Product-List</h4>
+            <label>GSTNumber</label>
+            <input type="text" defaultValue={props.editFormData.GSTNumber} onChange={(e) => { OnChangeFun(e, "GSTNumber") }} />
+            <br />
+            <label >Name</label>
+            <input type="text" defaultValue={props.editFormData.Name} onChange={(e) => { OnChangeFun(e, "Name") }} />
 
 
 
 
-          {
-            // props.editFormData && props.editFormData.InvoiceProduct
-            //  && props.editFormData.InvoiceProduct
+            <h4>Product-List</h4>
 
-            payloadData.InvoiceProduct.map((i, index) => {
-              return <>
 
-          <div className="LableDivEdit">
 
-               
-                <label className="ListNameHeader">List{index + 1}</label>
-                
-                <br />
 
-                <label >{keys[3]}</label>
-                <input type="text" defaultValue={i.Price} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[3]) }} ></input>
-                
-                <label  >{keys[4]}</label>
-                <input type="text" defaultValue={i.Item} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[4]) }} ></input>
+            {
+              // props.editFormData && props.editFormData.InvoiceProduct
+              //  && props.editFormData.InvoiceProduct
 
-                <label>{keys[5]}</label>
-                <input type="text" defaultValue={i.Product} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[5]) }} ></input>
-                
-                <label >{keys[8]}</label>
-                <input type="number" defaultValue={i.Quantity} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[8]) }} ></input>
+              payloadData.InvoiceProduct.map((i, index) => {
+                return <>
 
-                <label>{keys[6]}</label>
-                <input type="text" defaultValue={i.Size} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[6]) }} ></input>
-                
-                <label >{keys[7]}</label>
-                <input type="text" defaultValue={i.Weight} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[7]) }} ></input>
+                  <div className="LableDivEdit">
 
-                <br />
-                <br />
 
-                </div>
-              </>
-            })}
+                    <label className="ListNameHeader">List{index + 1}</label>
 
-</div>
+                    <br />
+
+                    <label >{keys[2]}</label>
+                    <input type="text" defaultValue={i.Price} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[2]) }} ></input>
+
+                    <label  >{keys[3]}</label>
+                    <input type="text" defaultValue={i.Item} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[3]) }} ></input>
+
+                    <label>{keys[4]}</label>
+                    <input type="text" defaultValue={i.Product} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[4]) }} ></input>
+
+                    <label >{keys[7]}</label>
+                    <input type="number" defaultValue={i.Quantity} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[7]) }} ></input>
+
+                    <label>{keys[5]}</label>
+                    <input type="text" defaultValue={i.Size} id={`${index}`} readOnly={true} onChange={(e) => { OnChangeFun(e, keys[5]) }} ></input>
+
+                    <label >{keys[6]}</label>
+                    <input type="text" defaultValue={i.Weight} id={`${index}`} onChange={(e) => { OnChangeFun(e, keys[6]) }} ></input>
+
+                    <br />
+                    <br />
+
+                  </div>
+                </>
+              })}
+
+          </div>
 
 
 
@@ -297,7 +316,7 @@ const QuoteFormEdit = (props) => {
 
 
         </form>
-        {productName !== undefined &&
+        {ShowproductName &&
           <Select
 
             defaultValue={selectedOption}
@@ -311,10 +330,10 @@ const QuoteFormEdit = (props) => {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit" onClick={(e) => { OnclickFun(e) }}>Submit</Button>
+        <Button className="AdBtn" type="submit" onClick={(e) => { OnclickFun(e) }}>Submit</Button>
         {productName === undefined ?
-          <Button type="submit" onClick={(e) => { OnclickEditFun(e) }}>Add List Item</Button> :
-          <Button type="submit" onClick={(e) => { OnclickAddNewItem(e) }}>Add Item</Button>}
+          <Button className="AdBtn" type="submit" onClick={(e) => { OnclickEditFun(e) }}>Add List Item</Button> :
+          <Button className="AdBtn" type="submit" onClick={(e) => { OnclickAddNewItem(e) }}>Add Item</Button>}
       </Modal.Footer>
 
     </Modal>

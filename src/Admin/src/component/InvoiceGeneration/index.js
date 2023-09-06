@@ -22,17 +22,17 @@ const InvoiceGeneration = () => {
   console.log(processData, AddedItemsData, "IIUU")
   const [coldef, setcoldef] = useState([
     {
-      field: 'Item',
+      field: 'Item', width: 180
 
     },
 
     // { field: 'Description' },
-    { field: 'Size' },
-    { field: 'Product' },
+    { field: 'Size', width: 160 },
+    { field: 'Product', width: 180 },
     // { field: 'ProductId' },
-    { field: 'Price', editable: true },
-    { field: 'Quantity', editable: true },
-    { field: 'Weight', editable: true },
+    { field: 'Price', editable: true , width: 180},
+    { field: 'Quantity', editable: true , width: 180},
+    { field: 'Weight', editable: true , width: 180},
     {
       field: 'Action', cellRenderer: (params) => (
         <AggridBtn
@@ -42,6 +42,7 @@ const InvoiceGeneration = () => {
 
         />
       ),
+        width: 180
     }
   ]);
   const [showSubmitbtn, setShowSubmitBtn] = useState(false)
@@ -128,11 +129,14 @@ const InvoiceGeneration = () => {
         obj['Weight'] = i.weight
         obj["ProductUniqId"] = i.ProductUniqId
         obj["shouldShowButton"] = true
+        obj["Hsno"]=i.Hsno
+
         arr.push(obj)
       }
 
 
     })
+   
 
     setRowData(arr)
   }
@@ -145,9 +149,9 @@ const InvoiceGeneration = () => {
   const [InvoiceData, setInvoiceData] = useState()
 
   return (<>
-    <h1>Invoice Generation</h1>
+    <h3>Invoice Generation</h3>
 
-    <div className="ag-theme-alpine agTable" >
+    <div className="ag-theme-alpine agTable Ag-InvoiceTable" >
 
       <AgGridReact columnDefs={coldef} rowData={rowData}
         rowSelection={'multiple'}
@@ -164,7 +168,7 @@ const InvoiceGeneration = () => {
       </div>}
 
     {show && <PreviewInvoice show={show} setShow={setShow} InvoiceData={InvoiceData} setInvoiceData={setInvoiceData}
-      setShowSubmitBtn={setShowSubmitBtn} />}
+      setShowSubmitBtn={setShowSubmitBtn} rowData={rowData} />}
     {show1 && <SubmitInvoice show={show1} setShow={setShow1} setPreview={setShow} setInvoiceData={setInvoiceData} />}
 
   </>)

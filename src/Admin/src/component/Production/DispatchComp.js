@@ -4,7 +4,7 @@ import axios from "axios";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 import { useNavigate } from "react-router";
-
+import axiosInstance from "../axiosconfig";
 const DispatchComp = () => {
 
   let date = new Date()
@@ -13,7 +13,6 @@ const DispatchComp = () => {
   let dateYear = date.getFullYear()
   let todayDate1 = dateday + '/' + dateMonth + "/" + dateYear;
   const url = process.env.REACT_APP_SERVICE_ID
-
 
 
   const InputFieldComp = (props) => {
@@ -26,7 +25,7 @@ const DispatchComp = () => {
       console.log(props.data, props, "OKLb a")
       let payload = { ...props.data, DispatchAmount: inputData }
 
-      axios.post(url + "dispatch", payload).then((res) => {
+      axiosInstance.post("dispatch", payload).then((res) => {
 
       })
 
@@ -47,16 +46,14 @@ const DispatchComp = () => {
 
 
   const [coldef, setcoldef] = useState([
-    { headerName: "Stock", field: 'StockName' },
-    { field: 'Size' },
-    { field: 'Hsno' },
-    { field: 'month' },
-    { field: 'year' },
-    { headerName: "Today Production", field: 'production' },
-
-
-    { field: 'availStock', headerName: "Available Stock" },
-    { field: "Dispatch", headerName: "Dispatch" },
+    { headerName: "Stock", field: 'StockName', width: 150 },
+    { field: 'Size', width: 150 },
+    { headerName: "Today Production", field: 'production', width: 200 },
+    { field: 'availStock', headerName: "Today Available Stock" , width: 200},
+    { field: "Dispatch", headerName: "Today Dispatch" , width: 200},
+    { field: 'Hsno', width: 150 },
+    { field: 'month' , width: 90},
+    { field: 'year', width: 100 },
 
   ]);
 
@@ -66,7 +63,7 @@ const DispatchComp = () => {
 
 
 
-    axios.get(url + "getStock").then((res) => {
+    axiosInstance.get( "getStock").then((res) => {
       console.log(res.data)
       let arr = []
       res.data.map((i) => {

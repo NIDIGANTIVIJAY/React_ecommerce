@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-
+import axiosInstance from '../../axiosconfig';
 const ProcessBtn =(props) => {
    const dispatch=useDispatch()
   const url=process.env.REACT_APP_SERVICE_ID
@@ -49,7 +49,7 @@ const ProcessBtn =(props) => {
     };
     payload["_id"]=props.data._id
     console.log(payload)
-    axios.post(url+"removequote",payload).then((res)=>{
+    axiosInstance.post("removequote",payload).then((res)=>{
         console.log(res)
         props.api.setRowData(res.data)
     })

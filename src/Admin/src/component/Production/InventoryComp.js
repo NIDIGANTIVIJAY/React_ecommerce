@@ -4,12 +4,11 @@ import axios from "axios";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 import { useNavigate } from "react-router";
-
+import axiosInstance from "../axiosconfig";
 import DispatchComp from "./DispatchComp";
 import DailyProd from "./DailyProdComp"
 
 import DispatchData from "./DispatchData";
-
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 const InventoryComp=()=>{
@@ -46,7 +45,7 @@ const InventoryComp=()=>{
      
         
 
-        axios.get(url + "getStock").then((res) => {
+      axiosInstance.get( "getStock").then((res) => {
             console.log(res.data)
             let arr=[]
             res.data.map((i)=>{
@@ -144,18 +143,16 @@ const InventoryComp=()=>{
       className="mb-3"
       onSelect={(e) =>onClicCompleteFun(e)}
     >
-      <Tab eventKey="dailyprod" title="Daily Production">
+      <Tab eventKey="dailyprod" title="Add Daily Production">
               <DailyProd/>
       </Tab>
-      <Tab eventKey="dispacth" title="Today's Dispatch"  >
-      <h3>Today Dispatch  & Prod </h3>
+      <Tab eventKey="dispacth" title="Today's Disp/Prod"  >
+      <h5>Today's Disp/Prod</h5>
              <DispatchComp/>
       </Tab>
-      <Tab eventKey="Totaldispacth" title="Prod & Dispatch"  >
-      <h3>Dispatch  & Prod </h3>
-      {key === "Totaldispacth" &&   <DispatchData/> }
-    
-         
+      <Tab eventKey="Totaldispacth" title="View Disp/Prod"  >
+      <h5>View Disp/Prod</h5>
+      {key === "Totaldispacth" && <DispatchData/> }  
       </Tab>
      
     </Tabs>
