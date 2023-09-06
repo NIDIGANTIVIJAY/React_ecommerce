@@ -5,20 +5,19 @@ import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 import AddNewItem from "./AddNewItem";
 import { useNavigate } from "react-router";
+import axiosInstance from "../axiosconfig";
 const Production=()=>{
   const url=process.env.REACT_APP_SERVICE_ID
 
   const [showModal,setShowModal]=useState(false)
   const nav=useNavigate()
 
-
   const updateBtn=(props)=>{
 
     const buttonClicked = () => {
       console.log(props.data)
-      axios.post(url+"editData",props.data).then((res)=>{
+      axiosInstance.post("editData",props.data).then((res)=>{
         setRowData(res.data)
-   
      })
     
     };
@@ -33,16 +32,16 @@ const Production=()=>{
     );
   };
   const [coldef,setcoldef]= useState([
-    { field: 'Item',editable: true  },
-    { field: 'Description',editable: true },
-    { field: 'Size',editable: true },
-    { field: 'Product' ,editable: true },
-    {headerName:"Total Quatity", field: 'Quantity'},
+    { field: 'Item',editable: true, width: 150  },
+    { field: 'Description',editable: true, width: 190 },
+    { field: 'Size',editable: true, width: 150 },
+    { field: 'Product' ,editable: true, width: 150 },
+    {headerName:"Total Quatity", field: 'Quantity', width: 150},
     // { field: 'ProductId' },
-    { field: 'Price'  ,editable: true },
+    { field: 'Price'  ,editable: true , width: 150},
    
-    { field: 'Weight' ,editable: true },
-    {field: 'Action' ,cellRenderer:updateBtn }
+    { field: 'Weight' ,editable: true, width: 150 },
+    {field: 'Action' ,cellRenderer:updateBtn, width: 150 }
 ]);
 const [rowData,setRowData]=useState()
 
@@ -99,7 +98,7 @@ useEffect(()=>{
   return(<>
     <h3>Production</h3>
     
-    <div className="ag-theme-alpine agTable" >
+    <div className="ag-theme-alpine Ag-productionTable" >
     <AgGridReact columnDefs={coldef} rowData={rowData}
       rowSelection={'multiple'}
       rowMultiSelectWithClick={true}

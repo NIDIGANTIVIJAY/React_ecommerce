@@ -5,12 +5,12 @@ import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 
 
-
+import axiosInstance from "../axiosconfig";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import parse from 'html-react-parser';
 
-
+import "./processInvoice/processing.css"
 
 import { Modal, Button } from "react-bootstrap";
 import "../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -42,10 +42,23 @@ const PreviewInvoice=(props)=>{
           payloadData["InvoiceProduct"]=formatedArray
         }
         console.log(payloadData,"PAYLOAD")
+        dispatch({
+          type:"SHOWLOADER",
+          payload:true
+        })
 
-        axios.post(url+"getquote",payloadData).then((res)=>{
+
+        axiosInstance.post("getquote",payloadData).then((res)=>{
             console.log(res)
-            setsrc(res.data)
+            if(res.status === 200){
+              dispatch({
+                type:"SHOWLOADER",
+                payload:false
+              })
+            setsrc(res.data+"#zoom=FitH&toolbar=0")
+
+
+            }
         })
      
             
@@ -95,7 +108,6 @@ const PreviewInvoice=(props)=>{
 
   return(<>
    
-
     <Modal
         show={props.show}
         onHide={onCloseFun}
@@ -108,7 +120,16 @@ const PreviewInvoice=(props)=>{
         </Modal.Header>
         <Modal.Body>
           <div className="invoiceContainer"> 
-          {parse(src)}
+          {/* {parse(src)} */}
+          <div class="iframe-container">
+          <iframe
+        src={src}
+        type="application/pdf"
+        width="100%"
+        height="100%"
+    
+    ></iframe>
+    </div>
           </div>
         </Modal.Body>
        

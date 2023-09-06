@@ -1,5 +1,5 @@
 .header {
-  background-color: #171717;
+  background-color: #171717; 
   padding: 1% 2%;
   text-align: center;
   color: white;
@@ -33,21 +33,43 @@
 .side-nav--diere {
   background-color: #808169;
   width: 100%;
-  height: 88vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.footerBtn{
+  display: flex;
+  justify-content: right;
+  gap: 12px;
+}
+
+.navbar{
+  align-items:unset;
 }
 
 
 .content-view {
   width: 80%;
-  margin-top: -2rem;
-  padding: 0rem 2rem;
+  /* margin-top: -2rem; */
+  padding: 0.5rem 1rem 0rem;
 }
 
 .agTable {
   height: 500px;
   width: 100%;
+}
+
+.Ag-gridContainer{
+  height: 450px;
+}
+
+.Ag-productionTable{
+  height: 540px;
+}
+
+.Ag-InvoiceTable{
+  height: 535px;
 }
 
 .sideBarBtn {
@@ -65,9 +87,9 @@
 }
 
 .sideBarBtn:hover{
-  border: 2px solid #ffa600;
+  border: 2px solid #0a0701;
   background-color: white;
-  color: #ffa600;
+  /* color: #266a6e; */
 }
 
 .sideBarBtnActive{
@@ -79,7 +101,7 @@
 .dashboardHeaderWrapper{
   display: flex;
     justify-content: space-between;
-    margin: 20px 0px 0px;
+    margin: 0px 0px 0px;
 }
 
 .dashboardContentView{
@@ -98,7 +120,7 @@
 .RowWrapp2{
   display: flex;
   width: 100%;
-  height: 37vh;
+  height: 41vh;
   /* border: 1px solid; */
 }
 .BarDiv{
@@ -135,13 +157,36 @@ height: 100%;
 
 }
 
-.sideBarBtn:hover {
-  /* transform: scale(1.09); */
-  /* background-color: transparent; */
+.pieBox{
+  margin-top: 7px;
+}
+.barBox{
+  margin-top: 7px;
 }
 
 .headerDiv {
   height: 3.5rem;
+}
+.dashboardContentView table tbody tr th, .dashboardContentView table tbody tr td {
+  padding: 3px 10px !important;
+}
+
+.dashboardContentView table tbody tr {
+  border-top: 1px solid #13244f;
+  border-bottom: 1px solid #13244f;
+  
+  height: 40px;
+}
+.c3-tooltip{
+  background-color: white !important;
+  padding: 0px;
+}
+.c3-tooltip tr .name{
+  font-weight: bold;
+}
+
+.pieBox .c3-tooltip tr .value{
+  display: none;
 }
 
 .Button {
@@ -150,6 +195,18 @@ height: 100%;
   display: flex;
   gap: 10px;
   justify-content: right;
+}
+
+.dashHeadeH5{
+  margin: 8px 12px 0px;
+  color: darkslategray;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+}
+
+.ButtonFlex{
+  margin-top: -0.4rem;
+
 }
 
 .Button button {
@@ -167,6 +224,10 @@ height: 100%;
   background-color: rgb(128, 129, 105);
   color: white;
   border: 2px solid white;
+}
+
+.AdBtn svg, .AdBtn img {
+  margin-top: -24px;
 }
 
 .AdBtn:hover {
@@ -215,14 +276,34 @@ height: 100%;
   gap: 10px;
 }
 
-.ModalUserCreate .modal-footer{
+/* .ModalUserCreate .modal-footer{
   justify-content: right;
   background-color: #cccccc;
+} */
+.logoutWrapper{
+  display: flex;
+  align-items: center;
+}
+.logoutIcon{
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 .updateAmt{
   padding: 0px 15px;
+
+  
 }
+
+
+/* text{
+  opacity: 1;
+  text-anchor: initial;
+  pointer-events: none;
+  font-size: 12px;
+  font-weight: 700;
+} */
 
 .dueAmtValue{
   width: 100px;
@@ -246,7 +327,7 @@ height: 100%;
 }
 
 .LableDiv label {
-  width: 110px;
+  width: 120px;
   margin: 6px;
 }
 
@@ -279,6 +360,30 @@ height: 100%;
   font-weight: 600;
 }
 
+.lableContainer{
+  display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 103px;
+    right: 17px;
+}
+
+.divContainer{
+  display: flex;
+}
+
+.divContainer input{ 
+  width: 125px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.lableContainer input, .lableContainer select{
+  width: 125px;
+  height: 30px;
+  border-radius: 5px;
+}
+
 
 @media screen and (max-width: 600px) {
 
@@ -287,6 +392,17 @@ height: 100%;
       height: 34px;
       margin-top: 3px;
   }
+
+  .lableContainer {
+    top: 143px;
+    gap: 5px;
+}
+
+.lableContainer input, .lableContainer select{
+  width: 100px;
+  height: 25px;
+  border-radius: 5px;
+}
 
   .dashboardContentView{
     height: 122vh;
@@ -359,3 +475,7 @@ height: 100%;
     margin: 0px;
   }
 }
+
+
+
+

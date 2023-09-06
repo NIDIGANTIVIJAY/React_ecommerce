@@ -8,10 +8,14 @@ import Select from 'react-select';
 
 
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import parse from 'html-react-parser';
 
+import ModaComponent from "../../Dashboard/ModalCompon";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axiosInstance from "../../axiosconfig";
 
 import { Modal, Button } from "react-bootstrap";
 
@@ -23,10 +27,13 @@ const SubmitInvoice = (props) => {
   const [productName, setproductName] = useState()
   const [usernameData,setusernameData]=useState()
   const [userDetails,setuserDetails]=useState()
-  const [vehicalNumber,setVehicalNumber]=useState()
+  const [vehicalNumber,setVehicalNumber]=useState("")
+
+  const [showModal, setModal] = useState(false)
+   const dispatch=useDispatch()
 
   useEffect(() => {
-    axios.get(url + "username").then((res) => {
+    axiosInstance.get(url + "username").then((res) => {
 
       let arr=[]
       setusernameData(res.data)
@@ -40,9 +47,19 @@ const SubmitInvoice = (props) => {
       })
     
       setproductName(arr)
-    })
+    }).catch((e)=>{
+      console.log(e)
+      toast.error('Something went Wrong', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+      dispatch({
+        type:"SHOWLOADER",
+        payload:false
+      })
 
-  }, [])
+  })
+
+  }, [showModal])
 
 
   console.log(formatedArray, "formatedArray")
@@ -65,6 +82,23 @@ const SubmitInvoice = (props) => {
       "vehicalNumber":""
 
     }
+   
+    if(selectedOption === null){
+      toast.error('Please Select the Email', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+      return
+    }
+    if(vehicalNumber === ""){
+      toast.error('Please Enter Vehical Number', {
+        autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+      });
+        return
+    }
+    dispatch({
+      type:"SHOWLOADER",
+      payload:true
+    })
     payloadData["productIdArr"] = processDataArra
 
     payloadData["Name"] = userDetails[0].username
@@ -74,13 +108,34 @@ const SubmitInvoice = (props) => {
     payloadData["phonenumber"]= userDetails[0].phonenumber
     payloadData["InvoiceProduct"] = formatedArray
     payloadData["vehicalNumber"]=vehicalNumber
-    axios.post(url + "savequoteData", payloadData).then((res) => {
+    
+    axiosInstance.post( "savequoteData", payloadData).then((res) => {
       console.log(res)
+      if(res.status === 200){
+        toast.success('Invoice Created Successfully', {
+          autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+        });
+        dispatch({
+          type:"SHOWLOADER",
+          payload:false
+        })
+        props.setShow(false)
+        props.setPreview(true)
+        props.setInvoiceData(payloadData)
+      }
+           
+    }).catch((e)=>{
+        console.log(e)
+        toast.error('Something went Wrong', {
+          autoClose: 5000, // Auto close the toast after 3 seconds (3000 milliseconds)
+        });
+        dispatch({
+          type:"SHOWLOADER",
+          payload:false
+        })
 
     })
-    props.setShow(false)
-    props.setPreview(true)
-    props.setInvoiceData(payloadData)
+  
 
   }
 
@@ -113,7 +168,11 @@ setuserDetails(data)
       <label className=" inputHeader">Please Slect Name</label>
       </Modal.Header>
       <Modal.Body>
-        
+
+      <div className="Button" style={{ margin: "-0.5rem 0 0.5rem", justifyContent: "right" }}>
+        <button className="AdBtn" type="submit" onClick={() => { setModal(true) }}>Add User</button>
+      </div>
+        <label>Email</label>
         <Select
 
           defaultValue={selectedOption}
@@ -153,6 +212,8 @@ setuserDetails(data)
             <br></br>
          
             </div>
+
+            
           
           )
          
@@ -163,13 +224,16 @@ setuserDetails(data)
         
          
 
+        
 
           {userDetails && userDetails.length > 0 &&  
           <>
+          <div className="LableDiv">
           
-          <label>vehical Number</label>
+          <label>Vehical Number</label>
             <input type="text" onChange={(e)=>{setVehicalNumber(e.target.value) }} />
           
+          </div>
             </>
             
             }
@@ -178,10 +242,12 @@ setuserDetails(data)
         <input type="text" onChange={(e) => { setGstNum(e.target.value) }} /> */}
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit" value={"submit"} onClick={() => { onClicSubmitFun() }}>Submit</Button>
+        <Button className="AdBtn" type="submit" value={"submit"} onClick={() => { onClicSubmitFun() }}>Submit</Button>
       </Modal.Footer>
 
     </Modal>
+
+    {showModal && <ModaComponent show={showModal} setShowModal1={setModal} />}
 
 
 

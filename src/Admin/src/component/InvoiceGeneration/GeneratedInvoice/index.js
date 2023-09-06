@@ -6,22 +6,23 @@ import 'ag-grid-community/styles//ag-theme-alpine.css';
 import axios from "axios";
 import { useSelector } from "react-redux";
 import DownloadCellRenderer from './AgGridDownload';
+import axiosInstance from '../../axiosconfig';
 
 const GenearatedInvoice = () => {
   const showModal = useSelector((state) => state.Common.showModal)
   const url = process.env.REACT_APP_SERVICE_ID
   const [coldef, setcolDef] = useState([
-    { field: "GSTNumber" },
-    { field: "Name" },
+    { field: "GSTNumber", width: 170 },
+    { field: "Name", width: 180 },
 
-    { field: "TotalQuatity" },
+    { field: "TotalQuatity", width: 150 },
 
-    { field: "TotalAmount" },
+    { field: "TotalAmount" , width: 150},
 
-    { field: "AmountPaid" },
-    { field: "DueAmount" },
-    { field: "Status" },
-    {headerName:"Action",
+    { field: "AmountPaid" , width: 150},
+    { field: "DueAmount", width: 150 },
+    { field: "Status", width: 150 },
+    {headerName:"Action", width: 120,
   
     cellRenderer:(param)=>< DownloadCellRenderer param={param}/>,}
    
@@ -30,7 +31,7 @@ const GenearatedInvoice = () => {
   const [rowData, setRowData] = useState()
 
   useEffect(() => {
-    axios.get(url + "GenearatedInvoice").then((res) => {
+    axiosInstance.get( "GenearatedInvoice").then((res) => {
       console.log(res.data)
 
       setRowData(res.data)
@@ -41,12 +42,12 @@ const GenearatedInvoice = () => {
 
   return (<>
     <div className="headerDiv">
-      <h1>Generated Invoice</h1>
+      <h3>Generated Invoice</h3>
     </div>
     
 
 
-    <div className="ag-theme-alpine agTable" >
+    <div className="ag-theme-alpine agTable Ag-InvoiceTable" >
 
       <AgGridReact columnDefs={coldef} rowData={rowData}
       />

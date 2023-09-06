@@ -4,12 +4,11 @@ import classes from "../../../../components/cssFile/AdminDashboard.module.css";
 import 'ag-grid-community/styles//ag-grid.css';
 import 'ag-grid-community/styles//ag-theme-alpine.css';
 
-
+import axiosInstance from "../axiosconfig";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
 import parse from 'html-react-parser';
-
 
 
 import { Modal, Button } from "react-bootstrap";
@@ -50,7 +49,7 @@ const AddNewItem =(props)=>{
         const headers = {
           "Content-Type": "form-data"
         };
-          axios.post(url+ "upload/data",formData,headers).then((res)=>{
+        axiosInstance.post( "upload/data",formData,headers).then((res)=>{
             console.log(res)
             if(res.status === 200){
               props.setShowModal(false)
@@ -115,11 +114,12 @@ const AddNewItem =(props)=>{
         size="xl"
       >
         <Modal.Header closeButton onClick={onCloseFun}>
-        
+      <label className=" inputHeader">Please Add Stock</label>
         </Modal.Header>
         <Modal.Body>
             
         <main className={classes.profile} >
+        <main className={ classes.initialauth}>
           <section>
             <form>
               <div className={classes.control}>
@@ -231,9 +231,10 @@ const AddNewItem =(props)=>{
             </form>
           </section>
         </main>
+        </main>
         </Modal.Body>
         <Modal.Footer>
-        <input type="submit" value={"submit"} onClick={(e)=>{AddFun(e)}} ></input>
+        <input className="AdBtn" type="submit" value={"submit"} onClick={(e)=>{AddFun(e)}} ></input>
         </Modal.Footer>
        
       </Modal>
