@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { imagefrombuffer } from "imagefrombuffer";
 import Auth from "./Auth"
-import { LoginFun } from "../../store/action/Login";
+import {  } from "../../store/action/Login";
 
 
 
