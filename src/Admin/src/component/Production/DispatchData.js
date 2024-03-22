@@ -57,9 +57,9 @@ const DispatchData = () => {
       if (res.status === 200) {
         console.log(res.data);
         let datesArra =
-          res.data[2].DailyProdDataArray[0].yearArray[0].monthArray[1]
-            .datesArray;
-        let Data = res.data;
+          res.data[2]?.DailyProdDataArray[0]?.yearArray[0]?.monthArray[1]
+            ?.datesArray;
+        let Data = res?.data;
         console.log(datesArra, "datesArra");
 
         let selctedDate = new Date(selectedDate);

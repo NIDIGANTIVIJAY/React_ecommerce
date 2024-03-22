@@ -14,9 +14,6 @@ const AgGridDownload = (props) => {
     const handleDownloadClick = () => {
         axiosInstance.post('downloadInvoice', props.param.data).then((res) => {
             if (res.status === 200) {
-
-
-
                 const byteCharacters = atob(res.data.split(',')[1]);
                 const byteNumbers = new Array(byteCharacters.length);
                 for (let i = 0; i < byteCharacters.length; i++) {
