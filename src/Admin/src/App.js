@@ -1,84 +1,61 @@
-import './App.css';
-import InvoiceGeneration from './component/InvoiceGeneration';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import Headers from "./components/jsFile/Header";
+import Headers1 from "./components/jsFile/Header1";
+import Home from "./components/jsFile/Home";
+import Product from "./components/jsFile/Product";
+import Sales from "./components/jsFile/Sales";
+import AdminDashboard from "./components/jsFile/AdminDashboard";
+import Footer from "./components/jsFile/Footer";
+import Contact from "./components/jsFile/Contact";
+import FAQ from "./components/jsFile/Faq";
+import About from "./components/jsFile/About";
+import Auth from "./components/jsFile/Auth";
+import Header from './components/jsFile/Header';
+import Signup from "./components/jsFile/AdminAccCreation/index"
+import AdminContainer from "./components/jsFile/AdminContainer/index"
+// import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route ,Outlet} from "react-router-dom";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import ContainerPage from "./components/jsFile/index" 
+function App() {
+  // const refresh = () => window.location.reload(true)
 
-import Component from './component';
-import Expenses from './component/Expenses';
-import Accounts from './component/Accounts';
-import Production from './component/Production';
-import ProcessInvoice from './component/InvoiceGeneration/processInvoice';
-import GenearatedInvoice from './component/InvoiceGeneration/GeneratedInvoice';
-import Dashboard from './component/Dashboard';
-import InventoryComp from './component/Production/InventoryComp';
-import DailyProd from './component/Production/DailyProdComp';
-import DispatchComp from './component/Production/DispatchComp';
-import InOutComponent from './component/Production/INOUTComponent';
-import Notification from '../../store/action/Notification';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import LoaderComp from "../../store/action/LoaderComp"
-import { Oval } from 'react-loader-spinner'
-import LoaderModal from './component/LoaderModal';
-function Admin() {
-    const type=useSelector((state)=>state.Common.Notitype)
-    const message=useSelector((state)=>state.Common.NotiMessg)
-   const showLoader=useSelector((state)=>state.Common.showLoader)
-     console.log(showLoader,"SHOWLOADER")
-   useEffect(()=>{
+  const location = useLocation();
 
-   },[message,type,showLoader])
-   
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const loggedInFun = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
 
   return (
-   <>
-  {/* {showLoader && 
-  <Oval
-  height={80}
-  width={80}
-  color="#4fa94d"
-  wrapperStyle={{}}
-  wrapperClass=""
-  visible={true}
-  ariaLabel='oval-loading'
-  secondaryColor="#4fa94d"
-  strokeWidth={2}
-  strokeWidthSecondary={2}
-
-/>  } */}
+    <>
+    <Header/>
       
       <Routes>
-        <Route path="/" element={<Component />} >
-        <Route path="invoice" element={<InvoiceGeneration />} />
-        <Route path="invoice/process" element={<ProcessInvoice />} />
-        <Route path="expenses" element={<Expenses />} />
-        <Route path="production" element={<Production />} />
-        <Route path='production/invetory' element={<InventoryComp/>}/>
-        <Route path='production/dailyprod' element={<DailyProd/>}/>
-        <Route path='production/dispatchprod' element={<DispatchComp/>}/>
-        <Route path='production/inOutMat' element={<InOutComponent/>}/>
-        <Route path="accounts" element={<Accounts />} />
-        <Route path='invoice/generatedinvoice' element={<GenearatedInvoice/>}/>
-        <Route path='Dashboard' element={<Dashboard/>}/>
-         </Route>
-
-         
-         
-      </Routes>
-{/*       
-      <ToastContainer />
-      {showLoader && <LoaderModal showLoader={showLoader} />} */}
-
-        
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/faq" element={<FAQ />} />
+        <Route exact path="/sales" element={<Sales />} />
+        <Route exact path="/adminDashboard" element={<AdminContainer />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/product" element={<Product />} />
+        <Route exact path="/login" element={<Auth />} />
+        <Route exact path="/signup" element={<Signup />} />
+      
+        </Routes>
+      
       
 
-      <Notification type={type} message={message} />
-      </>
-   
+      <div>
+        <Footer />
+      </div>
 
 
+      {/* <Outlet/> */}
+    </>
   );
 }
 
-export default Admin;
+export default App;
