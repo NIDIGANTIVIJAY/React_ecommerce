@@ -12,7 +12,7 @@ const AggridBtn =(props) => {
 
     console.log(props.data,"SDEF")
   const buttonClicked = () => {
-    console.log(formatArr,rowData,"FGGG")
+    console.log(formatArr,rowData,props.params.data.Quantity,"FGGG")
    
    
 
