@@ -14,9 +14,12 @@ const AdminContainer = () => {
    
 
   useEffect(() => {
+    console.log(userlogin,"userloginuserlogin")
+
     if (userlogin === false) {
       nav("/login");
     }
+   
   }, [userlogin]);
 
 

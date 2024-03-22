@@ -23,6 +23,8 @@ const onSuccessfun=(res)=>{
      
       
       if(res.status === 200){
+        console.log("success",res)
+
         nav("/adminDashboard"); 
        
        
