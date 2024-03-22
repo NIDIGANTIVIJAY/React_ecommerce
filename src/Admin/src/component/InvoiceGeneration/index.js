@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import PreviewInvoice from "./PreviewInvoice";
 import SubmitInvoice from "./processInvoice/SubmitInvoice"
 import JsonData from "../../../../store/action/jsonData";
+import { ToastContainer, toast } from 'react-toastify';
+
 const InvoiceGeneration = () => {
   const url = process.env.REACT_APP_SERVICE_ID
   const processData = useSelector((state) => state.Common.processingArray
@@ -116,8 +118,8 @@ const InvoiceGeneration = () => {
     console.log(res)
     let arr = []
     res.map((i) => {
-
-      if (i.quantity !== 0) {
+       console.log(typeof(i.quantity),i.quantity=== null)
+      if (i.quantity !== 0 && i.quantity !== null && i.quantity !== "null" ) {
         let obj = {}
         obj['Item'] = i.item
         obj['Description'] = i.description
@@ -136,6 +138,11 @@ const InvoiceGeneration = () => {
 
 
     })
+    if(arr.length === 0){
+      toast.error('Please Enter the Production Data', {
+        autoClose: 5000, 
+      });
+    }
    
 
     setRowData(arr)
